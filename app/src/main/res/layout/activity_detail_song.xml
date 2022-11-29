@@ -41,14 +41,14 @@
 
     <ImageView
         android:id="@+id/image_song"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/matcuoi"/>
 
     <ImageView
         android:id="@+id/heart"
@@ -70,7 +70,6 @@
         android:textColor="@color/primary"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_song"
@@ -99,27 +98,16 @@
         app:layout_constraintStart_toStartOf="@+id/heart"
         app:layout_constraintTop_toBottomOf="@+id/song" />
 
-<!--    <com.masoudss.lib.WaveformSeekBar-->
-<!--        app:wave_progress="33"-->
-<!--        app:wave_max_progress="100"-->
-<!--        app:wave_width="5dp"-->
-<!--        app:wave_gap="2dp"-->
-<!--        app:wave_min_height="5dp"-->
-<!--        app:wave_corner_radius="2dp"-->
-<!--        app:wave_background_color="@color/white"-->
-<!--        app:wave_progress_color="@color/blue"-->
-<!--        app:wave_gravity="center"-->
-<!--        app:wave_padding_top="2dp"-->
-<!--        app:wave_padding_Bottom="2dp"-->
-<!--        app:wave_padding_right="2dp"-->
-<!--        app:wave_padding_left="2dp"-->
-<!--        app:wave_visible_progress="50"-->
-<!--        app:marker_color="@color/red"-->
-<!--        app:marker_width="1dp"-->
-<!--        app:marker_text_color="@color/colorAccent"-->
-<!--        app:marker_text_padding="2dp"-->
-<!--        app:marker_text_size="12dp" />-->
 
+    <SeekBar
+        android:id="@+id/seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:backgroundTint="@color/second"
+        android:secondaryProgressTint="@color/primary"
+        app:layout_constraintTop_toBottomOf="@+id/author"
+        tools:layout_editor_absoluteX="0dp" />
 
     <ImageView
         android:id="@+id/shuffle"
@@ -145,11 +133,14 @@
         android:id="@+id/play"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginTop="108dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_play_circle"
-        tools:layout_editor_absoluteY="554dp" />
+        app:layout_constraintTop_toBottomOf="@+id/seek_bar"
+        app:layout_constraintVertical_bias="0.247"
+        app:srcCompat="@drawable/ic_play_circle" />
 
     <ImageView
         android:id="@+id/skip_next"
