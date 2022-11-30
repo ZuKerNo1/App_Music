@@ -39,7 +39,7 @@
         app:layout_constraintStart_toEndOf="@+id/expand"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image_song"
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -55,34 +55,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        app:layout_constraintBottom_toBottomOf="@+id/song"
+        app:layout_constraintBottom_toBottomOf="@+id/nameSong"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/song"
+        app:layout_constraintTop_toTopOf="@+id/nameSong"
         app:layout_constraintVertical_bias="0.562"
-        app:srcCompat="@drawable/ic_favorite" />
+        android:src="@drawable/ic_heart_solid"/>
 
     <TextView
-        android:id="@+id/song"
-        android:layout_width="wrap_content"
+        android:id="@+id/nameSong"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="Song"
+        android:textAlignment="center"
         android:textColor="@color/primary"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_song"
-        app:layout_constraintVertical_bias="0.66" />
+        app:layout_constraintEnd_toStartOf="@+id/more"
+        app:layout_constraintStart_toEndOf="@+id/heart"
+        app:layout_constraintTop_toBottomOf="@+id/image_song" />
 
     <ImageView
         android:id="@+id/more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
-        app:layout_constraintBottom_toBottomOf="@+id/song"
+        app:layout_constraintBottom_toBottomOf="@+id/nameSong"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/song"
+        app:layout_constraintTop_toTopOf="@+id/nameSong"
         app:srcCompat="@drawable/ic_more" />
 
     <TextView
@@ -96,18 +96,41 @@
         app:layout_constraintEnd_toEndOf="@+id/more"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="@+id/heart"
-        app:layout_constraintTop_toBottomOf="@+id/song" />
+        app:layout_constraintTop_toBottomOf="@+id/nameSong" />
+
+    <TextView
+        android:id="@+id/currentTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:text="0:00"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/author" />
 
 
     <SeekBar
         android:id="@+id/seek_bar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="112dp"
         android:backgroundTint="@color/second"
         android:secondaryProgressTint="@color/primary"
-        app:layout_constraintTop_toBottomOf="@+id/author"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toStartOf="@+id/totalTime"
+        app:layout_constraintStart_toEndOf="@+id/currentTime"
+        app:layout_constraintTop_toBottomOf="@+id/author" />
+
+    <TextView
+        android:id="@+id/totalTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0:00"
+        android:layout_marginTop="112dp"
+        android:layout_marginRight="10dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/author" />
 
     <ImageView
         android:id="@+id/shuffle"
@@ -140,7 +163,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seek_bar"
         app:layout_constraintVertical_bias="0.247"
-        app:srcCompat="@drawable/ic_play_circle" />
+        android:src="@drawable/ic_play_circle" />
 
     <ImageView
         android:id="@+id/skip_next"
