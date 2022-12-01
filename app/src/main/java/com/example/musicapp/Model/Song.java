@@ -2,22 +2,16 @@ package com.example.musicapp.Model;
 
 import java.io.Serializable;
 
-<<<<<<< HEAD:app/src/main/java/com/example/musicapp/Model/HotList.java
-public class HotList implements Serializable {
-=======
+
+
 public class Song implements Serializable {
->>>>>>> 1b1f3cb4ba5dea3a442104c55ce560848a1fda80:app/src/main/java/com/example/musicapp/Model/Song.java
     int id;
     String image, nameSong, singer, song;
 
     public Song() {
     }
 
-<<<<<<< HEAD:app/src/main/java/com/example/musicapp/Model/HotList.java
-    public HotList(int id, String image, String nameSong, String singer, String song) {
-=======
     public Song(int id, String image, String nameSong, String singer, String song) {
->>>>>>> 1b1f3cb4ba5dea3a442104c55ce560848a1fda80:app/src/main/java/com/example/musicapp/Model/Song.java
         this.id = id;
         this.image = image;
         this.nameSong = nameSong;
