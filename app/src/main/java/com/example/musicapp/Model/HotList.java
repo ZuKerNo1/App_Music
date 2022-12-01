@@ -3,12 +3,13 @@ package com.example.musicapp.Model;
 import java.io.Serializable;
 
 public class HotList implements Serializable {
-    String id, image, nameSong, singer, song;
+    int id;
+    String image, nameSong, singer, song;
 
     public HotList() {
     }
 
-    public HotList(String id, String image, String nameSong, String singer, String song) {
+    public HotList(int id, String image, String nameSong, String singer, String song) {
         this.id = id;
         this.image = image;
         this.nameSong = nameSong;
@@ -16,11 +17,11 @@ public class HotList implements Serializable {
         this.song = song;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
