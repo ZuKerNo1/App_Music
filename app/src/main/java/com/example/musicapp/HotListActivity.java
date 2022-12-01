@@ -6,13 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
 
 import com.example.musicapp.Adapter.HotListAdapter;
-import com.example.musicapp.Model.HotList;
+import com.example.musicapp.Model.Song;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,8 +24,9 @@ public class HotListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
+    FirebaseDatabase firebaseDatabase;
     HotListAdapter hotListAdapter;
-    ArrayList<HotList> list;
+    ArrayList<Song> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +49,7 @@ public class HotListActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    HotList hotList = dataSnapshot.getValue(HotList.class);
+                    Song hotList = dataSnapshot.getValue(Song.class);
                     list.add(hotList);
                 }
                 hotListAdapter.notifyDataSetChanged();
@@ -61,6 +60,11 @@ public class HotListActivity extends AppCompatActivity {
 
             }
         });
+
+//
+//        Bundle bundle = getIntent().getExtras();
+//        String id = (String) bundle.get("Action_next");
+//        firebaseDatabase.getInstance().getReference("Song").child(id);
 
 
 //        Bottom Nav

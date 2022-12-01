@@ -2,9 +2,8 @@ package com.example.musicapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.media.AudioManager;
+import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -17,14 +16,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.musicapp.Adapter.HotListAdapter;
-import com.example.musicapp.Model.HotList;
+import com.example.musicapp.Model.Song;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailSongActivity extends AppCompatActivity {
-    ImageView btnPlay;
+    ImageView btnPlay, nextMusic;
     SeekBar seekBar;
     MediaPlayer mediaPlayer;
     Runnable runnable;
@@ -51,6 +49,7 @@ public class DetailSongActivity extends AppCompatActivity {
         singer = findViewById(R.id.author);
         currentTime = findViewById(R.id.currentTime);
         totalTime = findViewById(R.id.totalTime);
+        nextMusic = findViewById(R.id.skip_next);
 
         btnPlay = findViewById(R.id.play);
         seekBar = findViewById(R.id.seek_bar);
@@ -58,7 +57,7 @@ public class DetailSongActivity extends AppCompatActivity {
 //        Lấy dữ liệu
 
         Bundle bundle = getIntent().getExtras();
-        HotList hotList = (HotList) bundle.get("object");
+        Song hotList = (Song) bundle.get("object");
 
         Glide.with(this).load(hotList.getImage()).fitCenter().into(image);
         nameSong.setText(hotList.getNameSong());
@@ -90,10 +89,14 @@ public class DetailSongActivity extends AppCompatActivity {
         });
 
 //       Tự động chuyển bài
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        nextMusic.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailSongActivity.this, HotListActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Action_next", hotList.getId());
+                intent. putExtras (bundle);
+                startService (intent);
             }
         });
 
@@ -105,11 +108,11 @@ public class DetailSongActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(mediaPlayer.isPlaying()){
                     handler.removeCallbacks(updater);
-                    btnPlay.setImageResource(R.drawable.ic_pause);
+                    btnPlay.setImageResource(R.drawable.ic_play_circle);
                     mediaPlayer.pause();
                 }else{
                     mediaPlayer.start();
-                    btnPlay.setImageResource(R.drawable.ic_play_circle);
+                    btnPlay.setImageResource(R.drawable.ic_pause);
                     updateSeekbar();
                 }
             }
@@ -118,6 +121,7 @@ public class DetailSongActivity extends AppCompatActivity {
 
     public void prepareMediaPlayer(String url){
         try {
+            btnPlay.setImageResource(R.drawable.ic_pause);
             mediaPlayer.setDataSource(url);
             mediaPlayer.prepare(); // might take long! (for buffering, etc)
             totalTime.setText(milliSecondToTimer(mediaPlayer.getDuration()));
@@ -170,7 +174,7 @@ public class DetailSongActivity extends AppCompatActivity {
 
 //    public String AutoChangeSong(){
 //        Bundle bundle = getIntent().getExtras();
-//        HotList hotList = (HotList) bundle.get("object");
+//        Song hotList = (Song) bundle.get("object");
 //
 //    }
 

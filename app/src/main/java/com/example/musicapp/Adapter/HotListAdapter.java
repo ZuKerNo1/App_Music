@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.musicapp.DetailSongActivity;
-import com.example.musicapp.Model.HotList;
+import com.example.musicapp.Model.Song;
 import com.example.musicapp.R;
 
 import java.util.ArrayList;
@@ -25,9 +24,9 @@ import java.util.ArrayList;
 public class HotListAdapter extends RecyclerView.Adapter<HotListAdapter.MyViewHolder>{
 
     Context context;
-    ArrayList<HotList> list;
+    ArrayList<Song> list;
 
-    public HotListAdapter(Context context, ArrayList<HotList> list) {
+    public HotListAdapter(Context context, ArrayList<Song> list) {
         this.context = context;
         this.list = list;
     }
@@ -41,9 +40,9 @@ public class HotListAdapter extends RecyclerView.Adapter<HotListAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        HotList hotList = list.get(position);
+        Song hotList = list.get(position);
 
-        holder.id.setText(hotList.getId());
+        holder.id.setText(String.valueOf(hotList.getId()));
         holder.nameSong.setText(hotList.getNameSong());
         holder.singer.setText(hotList.getSinger());
         Glide.with(context).load(hotList.getImage()).fitCenter();
@@ -57,7 +56,7 @@ public class HotListAdapter extends RecyclerView.Adapter<HotListAdapter.MyViewHo
 
     }
 
-    private void goToDetailSong(HotList hotList) {
+    private void goToDetailSong(Song hotList) {
         Intent intent = new Intent(context, DetailSongActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("object", hotList);
