@@ -1,6 +1,6 @@
 package com.example.musicapp.services;
 
-import com.example.musicapp.Model.HotList;
+//import com.example.musicapp.Model.HotList;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -10,7 +10,7 @@ public class services {
         id +=1;
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Library");
-        HotList hotList = new HotList(id, image, nameSong, singer, song);
-        reference.setValue(hotList);
+       // HotList hotList = new HotList(id, image, nameSong, singer, song);
+       // reference.setValue(hotList);
     }
 }

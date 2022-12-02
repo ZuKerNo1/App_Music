@@ -3,6 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Music App/App_Music/app/src/main/res/drawable-v24/dynamic_rv_bg.xml" value="0.2575" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/drawable-v24/search_bg.xml" value="0.2575" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/drawable-v24/static_rv_selected_bg.xml" value="0.2575" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/drawable/static_rv_bg.xml" value="0.2315" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/layout/activity_detail_song.xml" value="0.25416666666666665" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/layout/activity_home_login.xml" value="0.4" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/layout/activity_hot_list.xml" value="0.25" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/layout/activity_library.xml" value="0.25416666666666665" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/layout/activity_music.xml" value="0.25416666666666665" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/layout/activity_search.xml" value="0.25416666666666665" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/layout/activity_sign_in.xml" value="0.25416666666666665" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/layout/activity_sign_up.xml" value="0.25416666666666665" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/layout/fragment_album_list.xml" value="0.18425925925925926" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/layout/item_album.xml" value="0.18425925925925926" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/layout/music_rv_item.xml" value="0.264" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/layout/music_rv_item_layout" value="0.25416666666666665" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/layout/row_library.xml" value="0.25416666666666665" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/layout/static_rv_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Music App/App_Music/app/src/main/res/menu/menu.xml" value="0.2125" />
         <entry key="..\:/Project/Android/MusicApp/app/src/main/res/drawable-v24/ic_home.xml" value="0.234" />
         <entry key="..\:/Project/Android/MusicApp/app/src/main/res/drawable-v24/icon_back.xml" value="0.234" />
         <entry key="..\:/Project/Android/MusicApp/app/src/main/res/drawable/ic_hotlist.xml" value="0.234" />
