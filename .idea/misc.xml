@@ -3,37 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Project/Android/MusicApp/app/src/main/res/drawable-v24/ic_home.xml" value="0.234" />
-        <entry key="..\:/Project/Android/MusicApp/app/src/main/res/drawable-v24/icon_back.xml" value="0.234" />
-        <entry key="..\:/Project/Android/MusicApp/app/src/main/res/drawable/ic_hotlist.xml" value="0.234" />
-        <entry key="..\:/Project/Android/MusicApp/app/src/main/res/drawable/radius_image_song.xml" value="0.2805" />
-        <entry key="..\:/Project/Android/MusicApp/app/src/main/res/layout/activity_detail_song.xml" value="0.38697916666666665" />
-        <entry key="..\:/Project/Android/MusicApp/app/src/main/res/layout/activity_hot_list.xml" value="0.3509963768115942" />
-        <entry key="..\:/Project/Android/MusicApp/app/src/main/res/layout/activity_library.xml" value="0.358695652173913" />
-        <entry key="..\:/Project/Android/MusicApp/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
-        <entry key="..\:/Project/Android/MusicApp/app/src/main/res/layout/activity_search.xml" value="0.3509963768115942" />
-        <entry key="..\:/Project/Android/MusicApp/app/src/main/res/layout/detail_song.xml" value="0.3859375" />
-        <entry key="..\:/Project/Android/MusicApp/app/src/main/res/layout/row_library.xml" value="0.33" />
-        <entry key="..\:/Project/Android/MusicApp/app/src/main/res/menu/menu.xml" value="0.38333333333333336" />
-        <entry key="..\:/Users/AD/Desktop/App_Music/app/src/main/res/drawable/background_black_button_login.xml" value="0.253" />
-        <entry key="..\:/Users/AD/Desktop/App_Music/app/src/main/res/drawable/background_edit_text.xml" value="0.253" />
-        <entry key="..\:/Users/AD/Desktop/App_Music/app/src/main/res/drawable/background_home_login.xml" value="0.253" />
-        <entry key="..\:/Users/AD/Desktop/App_Music/app/src/main/res/drawable/bottom_bubble.xml" value="0.253" />
-        <entry key="..\:/Users/AD/Desktop/App_Music/app/src/main/res/drawable/icon_forward.xml" value="0.253" />
-        <entry key="..\:/Users/AD/Desktop/App_Music/app/src/main/res/drawable/top_bubble.xml" value="0.253" />
-        <entry key="..\:/Users/AD/Desktop/App_Music/app/src/main/res/drawable/white_background.xml" value="0.253" />
-        <entry key="..\:/Users/AD/Desktop/App_Music/app/src/main/res/layout/activity_home_login.xml" value="0.3509963768115942" />
-        <entry key="..\:/Users/AD/Desktop/App_Music/app/src/main/res/layout/activity_sign_in.xml" value="0.3509963768115942" />
-        <entry key="..\:/Users/AD/Desktop/App_Music/app/src/main/res/layout/activity_sign_up.xml" value="0.3509963768115942" />
-        <entry key="..\:/Users/AD/Desktop/App_Music/app/src/main/res/layout/row_library.xml" value="0.358695652173913" />
-        <entry key="..\:/Users/FSC/Desktop/App_Music/app/src/main/res/drawable/ic_favorite.xml" value="0.1545" />
-        <entry key="..\:/Users/FSC/Desktop/App_Music/app/src/main/res/layout/activity_detail_song.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/FSC/Desktop/App_Music/app/src/main/res/layout/activity_hot_list.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/FSC/Desktop/App_Music/app/src/main/res/layout/activity_library.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/FSC/Desktop/App_Music/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/FSC/Desktop/App_Music/app/src/main/res/layout/activity_search.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/FSC/Desktop/App_Music/app/src/main/res/layout/detail_song.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/FSC/Desktop/App_Music/app/src/main/res/layout/row_library.xml" value="0.25416666666666665" />
+        <entry key="..\:/Project/Android/Youtube/app/src/main/res/layout/activity_main.xml" value="0.35280797101449274" />
       </map>
     </option>
   </component>
