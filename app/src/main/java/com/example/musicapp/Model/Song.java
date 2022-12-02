@@ -13,6 +13,9 @@ public class Song implements Serializable {
 
     public Song(int id, String image, String nameSong, String singer, String song) {
         this.id = id;
+
+
+
         this.image = image;
         this.nameSong = nameSong;
         this.singer = singer;

@@ -33,11 +33,11 @@ public class HotListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hot_list);
 
-//Ánh xạ
+        //Ánh xạ
         recyclerView = findViewById(R.id.recyclerView);
 
-//        Lấy dữ liệu từ FireBase
-        databaseReference = FirebaseDatabase.getInstance().getReference("HotList");
+        //Lấy dữ liệu từ FireBase
+        databaseReference = FirebaseDatabase.getInstance().getReference("song");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
