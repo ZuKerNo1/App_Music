@@ -106,6 +106,10 @@ public class SignInActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
+
+                        String uid = mAuth.getUid();
+                        Toast.makeText(SignInActivity.this,"uid: "+uid+" hello",Toast.LENGTH_LONG ).show();
                         startActivity(new Intent(SignInActivity.this, MainActivity.class));
                         finish();
                     }

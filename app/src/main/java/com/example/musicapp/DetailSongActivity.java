@@ -69,6 +69,13 @@ public class DetailSongActivity extends AppCompatActivity {
 //        Chạy nhạc khi vào trang detail
         prepareMediaPlayer(hotList.getSong());
 
+//      Thêm yêu thích
+
+        ImageView heart = findViewById(R.id.heart);
+
+
+
+
 //        Tua nhạc
         seekBar.setOnTouchListener(new View.OnTouchListener() {
             @Override

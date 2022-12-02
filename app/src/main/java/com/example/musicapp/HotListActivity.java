@@ -27,6 +27,7 @@ public class HotListActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     HotListAdapter hotListAdapter;
     ArrayList<Song> list;
+    ArrayList<Song> MonoList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +38,12 @@ public class HotListActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
 
 //        Lấy dữ liệu từ FireBase
-        databaseReference = FirebaseDatabase.getInstance().getReference("HotList");
+        databaseReference = FirebaseDatabase.getInstance().getReference("song");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
+        MonoList = new ArrayList<>();
         hotListAdapter = new HotListAdapter(this, list);
         recyclerView.setAdapter(hotListAdapter);
 
@@ -52,6 +54,7 @@ public class HotListActivity extends AppCompatActivity {
                     Song hotList = dataSnapshot.getValue(Song.class);
                     list.add(hotList);
                 }
+
                 hotListAdapter.notifyDataSetChanged();
             }
 
@@ -60,6 +63,7 @@ public class HotListActivity extends AppCompatActivity {
 
             }
         });
+
 
 //
 //        Bundle bundle = getIntent().getExtras();
