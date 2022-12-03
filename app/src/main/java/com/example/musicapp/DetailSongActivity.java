@@ -83,6 +83,11 @@ public class DetailSongActivity extends AppCompatActivity {
                 if(currentSong.getVideoId() != null) {
                     intent.putExtra("videoId", currentSong.getVideoId());
                 }
+                if(mediaPlayer.isPlaying()) {
+                    btnPlay.setImageResource(R.drawable.ic_play_circle);
+                    mediaPlayer.pause();
+                }
+                startActivity(intent);
             }
         });
 

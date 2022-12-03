@@ -1,36 +1,45 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@color/white"
+    tools:context=".MusicVideoActivity">
 
     <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
         android:id="@+id/youtube_player_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:videoId="S0Q4gqBUs7c"
-        app:autoPlay="true" />
+        app:autoPlay="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp" />
 
     <TextView
         android:id="@+id/nameSong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/primary"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:text="NAME SONG" />
+        android:layout_marginTop="30dp"
+        android:text="NAME SONG"
+        android:textColor="@color/primary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/youtube_player_view" />
 
     <TextView
         android:id="@+id/singer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/second"
-        android:textSize="16sp"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        android:text="Singer" />
-</LinearLayout>
+        android:layout_marginTop="24dp"
+        android:textColor="@color/second"
+        android:text="Singer"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameSong" />
+</androidx.constraintlayout.widget.ConstraintLayout>
