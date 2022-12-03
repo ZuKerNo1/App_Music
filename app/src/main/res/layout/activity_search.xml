@@ -23,6 +23,7 @@
         android:id="@+id/recyclerViewSearch"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="65dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,9 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             app:menu="@menu/search_btn">
-
         </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
