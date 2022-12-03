@@ -37,7 +37,7 @@ public class HotListActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
 
 //        Lấy dữ liệu từ FireBase
-        databaseReference = FirebaseDatabase.getInstance().getReference("HotList");
+        databaseReference = FirebaseDatabase.getInstance().getReference("song");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -49,8 +49,10 @@ public class HotListActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Song hotList = dataSnapshot.getValue(Song.class);
-                    list.add(hotList);
+                    Song song = dataSnapshot.getValue(Song.class);
+                    if(song.getType()!=null && song.getType().equals("HotList") ){
+                        list.add(song);
+                    }
                 }
                 hotListAdapter.notifyDataSetChanged();
             }
@@ -60,11 +62,6 @@ public class HotListActivity extends AppCompatActivity {
 
             }
         });
-
-//
-//        Bundle bundle = getIntent().getExtras();
-//        String id = (String) bundle.get("Action_next");
-//        firebaseDatabase.getInstance().getReference("Song").child(id);
 
 
 //        Bottom Nav
@@ -94,5 +91,28 @@ public class HotListActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public ArrayList<Song> getHotList(String type){
+        ArrayList<Song> HotList = new ArrayList<>();
+        databaseReference = FirebaseDatabase.getInstance().getReference("song");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Song song = dataSnapshot.getValue(Song.class);
+                    if(song.getType() == "HotList"){
+                        HotList.add(song);
+                    }
+                }
+                hotListAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return HotList;
     }
 }
