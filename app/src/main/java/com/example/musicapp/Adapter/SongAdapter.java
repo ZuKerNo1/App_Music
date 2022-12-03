@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder>{
     Context context;
-    ArrayList<Song> list;
+    public static ArrayList<Song> list;
 
     public SongAdapter(Context context, ArrayList<Song> list) {
         this.context = context;
@@ -54,7 +54,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder>{
 
     }
 
-    private void goToDetailSong(Song song) {
+    public void goToDetailSong(Song song) {
         Intent intent = new Intent(context, DetailSongActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("object", song);
