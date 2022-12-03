@@ -19,21 +19,24 @@ import com.example.musicapp.Adapter.HotListAdapter;
 import com.example.musicapp.Model.Song;
 import com.google.firebase.database.DatabaseReference;
 
+import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailSongActivity extends AppCompatActivity {
-    ImageView btnPlay, nextMusic;
+    ImageView btnPlay, nextMusic, previousMusic, repeat, shuffle;
     SeekBar seekBar;
     MediaPlayer mediaPlayer;
     Runnable runnable;
     Animation animation;
     Handler handler = new Handler();
-    HotListAdapter hotListAdapter;
-    DatabaseReference databaseReference;
+    Boolean isRepeat = false, isShuffle = false;
+
 
     CircleImageView image;
     TextView nameSong, singer, currentTime, totalTime;
 
+    public static Song currentSong;
 
 
     @Override
@@ -50,6 +53,9 @@ public class DetailSongActivity extends AppCompatActivity {
         currentTime = findViewById(R.id.currentTime);
         totalTime = findViewById(R.id.totalTime);
         nextMusic = findViewById(R.id.skip_next);
+        previousMusic = findViewById(R.id.skip_previous);
+        repeat = findViewById(R.id.repeat);
+        shuffle = findViewById(R.id.shuffle);
 
         btnPlay = findViewById(R.id.play);
         seekBar = findViewById(R.id.seek_bar);
@@ -57,17 +63,148 @@ public class DetailSongActivity extends AppCompatActivity {
 //        Lấy dữ liệu
 
         Bundle bundle = getIntent().getExtras();
-        Song hotList = (Song) bundle.get("object");
+         currentSong = (Song) bundle.get("object");
 
-        Glide.with(this).load(hotList.getImage()).fitCenter().into(image);
-        nameSong.setText(hotList.getNameSong());
-        singer.setText(hotList.getSinger());
+        Glide.with(this).load(currentSong.getImage()).fitCenter().into(image);
+        nameSong.setText(currentSong.getNameSong());
+        singer.setText(currentSong.getSinger());
+
 
         mediaPlayer = new MediaPlayer();
         handler = new Handler();
 
-//        Chạy nhạc khi vào trang detail
-        prepareMediaPlayer(hotList.getSong());
+
+//      Chạy nhạc khi vào trang detail
+        prepareMediaPlayer(currentSong.getSong());
+
+//      Chuyển bài hat
+        nextMusic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = getIntent().getExtras();
+                ArrayList<Song> listSong = (ArrayList<Song>) bundle.get("listSong");
+
+                int position = 0;
+
+                for (Song song : listSong) {
+                    if (song.getId() == currentSong.getId())
+                        position = listSong.indexOf(song);
+                }
+                position++;
+                if(position < listSong.size()){
+                    currentSong = listSong.get(position);
+                    mediaPlayer.reset();
+                    Glide.with(DetailSongActivity.this).load(currentSong.getImage()).fitCenter().into(image);
+                    nameSong.setText(currentSong.getNameSong());
+                    singer.setText(currentSong.getSinger());
+                    btnPlay.setImageResource(R.drawable.ic_play_circle);
+                    prepareMediaPlayer(currentSong.getSong());
+                }else{
+                    mediaPlayer.reset();
+                    prepareMediaPlayer(currentSong.getSong());
+                }
+
+
+            }
+        });
+
+        previousMusic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = getIntent().getExtras();
+                ArrayList<Song> listSong = (ArrayList<Song>) bundle.get("listSong");
+
+                int position = 0;
+                for (Song song : listSong) {
+                    if (song.getId() == currentSong.getId() )
+                        position = listSong.indexOf(song);
+                }
+                position--;
+                if(position >= 0){
+                    currentSong = listSong.get(position);
+                    mediaPlayer.reset();
+
+                    Glide.with(DetailSongActivity.this).load(currentSong.getImage()).fitCenter().into(image);
+                    nameSong.setText(currentSong.getNameSong());
+                    singer.setText(currentSong.getSinger());
+                    btnPlay.setImageResource(R.drawable.ic_play_circle);
+                    prepareMediaPlayer(currentSong.getSong());
+                }
+                else{
+                    mediaPlayer.reset();
+                    prepareMediaPlayer(currentSong.getSong());
+                }
+
+            }
+        });
+
+//       Auto chuyển bài hát khi hết
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                Bundle bundle = getIntent().getExtras();
+                ArrayList<Song> listSong = (ArrayList<Song>) bundle.get("listSong");
+
+                int position = 0;
+
+                for (Song song : listSong) {
+                    if (song.getId() == currentSong.getId())
+                        position = listSong.indexOf(song);
+                }
+                position++;
+                if(position < listSong.size()){
+                    currentSong = listSong.get(position);
+                    mediaPlayer.reset();
+                    Glide.with(DetailSongActivity.this).load(currentSong.getImage()).fitCenter().into(image);
+                    nameSong.setText(currentSong.getNameSong());
+                    singer.setText(currentSong.getSinger());
+                    btnPlay.setImageResource(R.drawable.ic_play_circle);
+                    prepareMediaPlayer(currentSong.getSong());
+                }else{
+                    mediaPlayer.reset();
+                    prepareMediaPlayer(currentSong.getSong());
+                }
+            }
+        });
+
+//        Repeat nhạc
+        repeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!isRepeat){
+                    if(isShuffle){
+                        isShuffle = false;
+                        repeat.setImageResource(R.drawable.ic_repeat);
+                        shuffle.setImageResource(R.drawable.ic_unshuffle);
+                    }else{
+                        shuffle.setImageResource(R.drawable.ic_unshuffle);
+                    }
+                    isRepeat = true;
+                }else{
+                    repeat.setImageResource(R.drawable.ic_repeat);
+                    isRepeat = false;
+                }
+            }
+        });
+//        Trộn nhạc
+        shuffle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!isShuffle){
+                    if (isRepeat){
+                        isRepeat = false;
+                        shuffle.setImageResource(R.drawable.ic_unshuffle);
+                        repeat.setImageResource(R.drawable.ic_repeat);
+                    }else {
+                        shuffle.setImageResource(R.drawable.ic_unshuffle);
+                    }
+                    isShuffle = true;
+                }else {
+                    shuffle.setImageResource(R.drawable.ic_shuffle);
+                    isShuffle = false;
+                }
+            }
+        });
 
 //        Tua nhạc
         seekBar.setOnTouchListener(new View.OnTouchListener() {
@@ -88,21 +225,8 @@ public class DetailSongActivity extends AppCompatActivity {
             }
         });
 
-//       Tự động chuyển bài
-        nextMusic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DetailSongActivity.this, HotListActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("Action_next", hotList.getId());
-                intent. putExtras (bundle);
-                startService (intent);
-            }
-        });
 
-
-
-//        Chuyển trạng thái icon
+//        Chuyển trạng thái nhạc
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,13 +243,15 @@ public class DetailSongActivity extends AppCompatActivity {
         });
     }
 
+//    Hàm chạy nhạc bằng url
     public void prepareMediaPlayer(String url){
+//        mediaPlayer.reset();
         try {
             btnPlay.setImageResource(R.drawable.ic_pause);
             mediaPlayer.setDataSource(url);
             mediaPlayer.prepare(); // might take long! (for buffering, etc)
-            totalTime.setText(milliSecondToTimer(mediaPlayer.getDuration()));
             mediaPlayer.start();
+            totalTime.setText(milliSecondToTimer(mediaPlayer.getDuration()));
             image.startAnimation(animation);
             updateSeekbar();
         } catch (Exception e) {
@@ -172,10 +298,5 @@ public class DetailSongActivity extends AppCompatActivity {
         return timerString;
     }
 
-//    public String AutoChangeSong(){
-//        Bundle bundle = getIntent().getExtras();
-//        Song hotList = (Song) bundle.get("object");
-//
-//    }
 
 }

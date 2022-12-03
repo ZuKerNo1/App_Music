@@ -50,18 +50,22 @@ public class HotListAdapter extends RecyclerView.Adapter<HotListAdapter.MyViewHo
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToDetailSong(hotList);
+                goToDetailSong(hotList, list);
             }
         });
 
     }
 
-    private void goToDetailSong(Song hotList) {
+    private void goToDetailSong(Song songClick, ArrayList<Song> listSong) {
         Intent intent = new Intent(context, DetailSongActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("object", hotList);
+        bundle.putSerializable("object", songClick);
+
+        Bundle bundle2 = new Bundle();
+        bundle2.putSerializable("listSong", listSong);
 
         intent. putExtras (bundle);
+        intent. putExtras (bundle2);
 
         context.startActivity (intent);
     }
