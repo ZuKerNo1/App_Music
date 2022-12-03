@@ -50,8 +50,10 @@
         android:layout_height="69dp"
         android:layout_marginStart="@dimen/_18sdp"
         android:layout_marginTop="12dp"
-        android:text="lorem"
-        android:textColor="@color/black"
+        android:text="Welcome back"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.023"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +82,7 @@
                 android:background="@drawable/background_edit_text"
                 android:ems="10"
                 android:inputType="textEmailAddress"
-                android:text="email" />
+                android:hint="email" />
 
             <EditText
                 android:id="@+id/editTextPassword"
@@ -93,7 +95,7 @@
                 android:background="@drawable/background_edit_text"
                 android:ems="10"
                 android:inputType="textPassword"
-                android:text="password" />
+                android:hint="password" />
 
             <TextView
                 android:layout_width="match_parent"

@@ -49,8 +49,10 @@
         android:layout_height="69dp"
         android:layout_marginStart="@dimen/_18sdp"
         android:layout_marginTop="12dp"
-        android:text="lorem"
-        android:textColor="@color/black"
+        android:text="Welcome to my music app"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.023"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +81,7 @@
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:paddingHorizontal="20dp"
-                android:text="Email" />
+                android:hint="Email" />
 
             <EditText
                 android:id="@+id/editTextPassword"
@@ -92,7 +94,7 @@
                 android:ems="10"
                 android:inputType="textPassword"
                 android:paddingHorizontal="20dp"
-                android:text="password" />
+                android:hint="password" />
 
             <EditText
                 android:id="@+id/editTextPasswordConfirm"
@@ -105,7 +107,7 @@
                 android:ems="10"
                 android:inputType="textPassword"
                 android:paddingHorizontal="20dp"
-                android:text="password" />
+                android:hint="password" />
 
             <Button
                 android:id="@+id/btnSignUp"
