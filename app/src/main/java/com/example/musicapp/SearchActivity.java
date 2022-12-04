@@ -8,14 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.SearchView;
-import android.widget.TextView;
 
 import com.example.musicapp.Adapter.SongAdapter;
 import com.example.musicapp.Model.Song;
@@ -26,8 +19,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -44,8 +39,9 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         recyclerView = findViewById(R.id.recyclerViewSearch);
-
         searchView = findViewById(R.id.textSearchView);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
+        bottomNavigationView.setSelectedItemId(R.id.search);
 
         //Lấy dữ liệu từ FireBase
         databaseReference = FirebaseDatabase.getInstance().getReference("song");
@@ -65,7 +61,6 @@ public class SearchActivity extends AppCompatActivity {
                     songAdapter.notifyDataSetChanged();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -80,14 +75,10 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterSong(newText.toLowerCase());
+                filterSong(converToString(newText.toLowerCase().trim()));
                 return true;
             }
         });
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
-
-        bottomNavigationView.setSelectedItemId(R.id.search);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -119,7 +110,7 @@ public class SearchActivity extends AppCompatActivity {
         if(listSongSearch.size() > 0)
         {
             for( Song songSearch : listSongSearch){
-                if(songSearch.getNameSong().toLowerCase().contains(query) || songSearch.getSinger().toLowerCase().contains(query)){
+                if(converToString(songSearch.getNameSong().toLowerCase()).contains(query) || converToString(songSearch.getSinger().toLowerCase()).contains(query)){
                     filteredList.add(songSearch);
                 }
             }
@@ -127,5 +118,18 @@ public class SearchActivity extends AppCompatActivity {
                 songAdapter.filterSongs(filteredList);
             }
         }
+    }
+
+    public String converToString(String value){
+        try {
+            String temp = Normalizer.normalize(value, Normalizer.Form.NFD);
+            Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+            temp = pattern.matcher(temp).replaceAll("");
+            return temp.replaceAll("đ", "d");
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
     }
 }
