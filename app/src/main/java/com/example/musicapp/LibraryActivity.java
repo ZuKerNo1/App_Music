@@ -32,7 +32,7 @@ public class LibraryActivity extends AppCompatActivity {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseDatabase firebaseDatabase;
     HotListAdapter hotListAdapter;
-    ArrayList<Song> listSong ;
+    ArrayList<Song> listSong;
     ArrayList<Song> myList;
 
     @Override
@@ -76,7 +76,7 @@ public class LibraryActivity extends AppCompatActivity {
 
 //        Lấy dữ liệu từ FireBase
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("song");
+        databaseReference = FirebaseDatabase.getInstance().getReference("song_gg");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -95,9 +95,6 @@ public class LibraryActivity extends AppCompatActivity {
 
             }
         });
-
-
-
 
 
 //
@@ -123,6 +120,10 @@ public class LibraryActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
+                    case R.id.play:
+                        DetailSongActivity.ac.
+                        startActivity(new Intent(getApplicationContext(), DetailSongActivity.class));
+                        overridePendingTransition(0, 0);
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         overridePendingTransition(0, 0);

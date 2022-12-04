@@ -1,7 +1,9 @@
 package com.example.musicapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -13,11 +15,20 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.musicapp.Adapter.HotListAdapter;
+import com.example.musicapp.Model.Favourite;
 import com.example.musicapp.Model.Song;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -27,19 +38,26 @@ public class DetailSongActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
     Runnable runnable;
     Animation animation;
+    ImageView heart;
     Handler handler = new Handler();
     HotListAdapter hotListAdapter;
     DatabaseReference databaseReference;
+     ArrayList<Integer> favList;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    public static Activity ac;
+    public String key;
+    boolean favourited;
 
     CircleImageView image;
     TextView nameSong, singer, currentTime, totalTime;
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_song);
+        ac = this;
+
 
         animation = AnimationUtils.loadAnimation(this, R.anim.rotate);
 
@@ -53,6 +71,8 @@ public class DetailSongActivity extends AppCompatActivity {
 
         btnPlay = findViewById(R.id.play);
         seekBar = findViewById(R.id.seek_bar);
+
+        heart = findViewById(R.id.heart);
 
 //        Lấy dữ liệu
 
@@ -71,9 +91,79 @@ public class DetailSongActivity extends AppCompatActivity {
 
 //      Thêm yêu thích
 
+        favList = new ArrayList<>();
         ImageView heart = findViewById(R.id.heart);
 
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("favourite");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Favourite favourite = dataSnapshot.getValue(Favourite.class);
+                    if (favourite.getUid().equals(mAuth.getUid())) {
+                        favList.add(favourite.getSongId());
+                    }
 
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        if (checkFav(hotList, favList)) {
+            favourited = true;
+            heart.setImageResource(R.drawable.ic_heart_red);
+        } else {
+            favourited = false;
+            heart.setImageResource(R.drawable.ic_heart_solid);
+        }
+        ;
+
+        heart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Favourite favourite = new Favourite(mAuth.getUid(), hotList.getId());
+                if (!favourited) {
+                    heart.setImageResource(R.drawable.ic_heart_red);
+                    FirebaseDatabase.getInstance().getReference("favourite").push().setValue(favourite);
+                    Toast.makeText(DetailSongActivity.this, "Đã thêm vào danh sách yêu thích", Toast.LENGTH_SHORT).show();
+                    favourited = true;
+
+                } else {
+                    heart.setImageResource(R.drawable.ic_heart_solid);
+
+//                    Xóa data trên firebase
+                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("favourite");
+                    databaseReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                Favourite favourite = dataSnapshot.getValue(Favourite.class);
+                                if (favourite.getUid().equals(mAuth.getUid()) && favourite.getSongId() == hotList.getId()) {
+                                    key = dataSnapshot.getKey();
+
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                    FirebaseDatabase.getInstance().getReference("favourite/"+key).removeValue();
+                    Toast.makeText(DetailSongActivity.this, "Đã xóa khỏi danh sách yêu thích", Toast.LENGTH_SHORT).show();
+                    favourited = false;
+
+
+                }
+            }
+        });
 
 
 //        Tua nhạc
@@ -102,22 +192,21 @@ public class DetailSongActivity extends AppCompatActivity {
                 Intent intent = new Intent(DetailSongActivity.this, HotListActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("Action_next", hotList.getId());
-                intent. putExtras (bundle);
-                startService (intent);
+                intent.putExtras(bundle);
+                startService(intent);
             }
         });
-
 
 
 //        Chuyển trạng thái icon
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mediaPlayer.isPlaying()){
+                if (mediaPlayer.isPlaying()) {
                     handler.removeCallbacks(updater);
                     btnPlay.setImageResource(R.drawable.ic_play_circle);
                     mediaPlayer.pause();
-                }else{
+                } else {
                     mediaPlayer.start();
                     btnPlay.setImageResource(R.drawable.ic_pause);
                     updateSeekbar();
@@ -126,7 +215,7 @@ public class DetailSongActivity extends AppCompatActivity {
         });
     }
 
-    public void prepareMediaPlayer(String url){
+    public void prepareMediaPlayer(String url) {
         try {
             btnPlay.setImageResource(R.drawable.ic_pause);
             mediaPlayer.setDataSource(url);
@@ -150,14 +239,14 @@ public class DetailSongActivity extends AppCompatActivity {
         }
     };
 
-    public void updateSeekbar(){
-        if(mediaPlayer.isPlaying()){
-            seekBar.setProgress((int) (((float) mediaPlayer.getCurrentPosition() / mediaPlayer.getDuration()) *100));
+    public void updateSeekbar() {
+        if (mediaPlayer.isPlaying()) {
+            seekBar.setProgress((int) (((float) mediaPlayer.getCurrentPosition() / mediaPlayer.getDuration()) * 100));
             handler.postDelayed(updater, 1000);
         }
     }
 
-    public String milliSecondToTimer(long milliSeconds){
+    public String milliSecondToTimer(long milliSeconds) {
         String timerString = "";
         String secondString;
 
@@ -165,13 +254,13 @@ public class DetailSongActivity extends AppCompatActivity {
         int minutes = (int) (milliSeconds % (1000 * 60 * 60)) / (1000 * 60);
         int seconds = (int) ((milliSeconds % (1000 * 60 * 60)) % (1000 * 60) / 1000);
 
-        if(hours > 0){
+        if (hours > 0) {
             timerString = hours + ":";
         }
 
-        if(seconds < 10){
+        if (seconds < 10) {
             secondString = "0" + seconds;
-        }else{
+        } else {
             secondString = "" + seconds;
         }
 
@@ -184,5 +273,15 @@ public class DetailSongActivity extends AppCompatActivity {
 //        Song hotList = (Song) bundle.get("object");
 //
 //    }
+
+    //check favourited
+    public boolean checkFav(Song song, ArrayList<Integer> favListSong) {
+        for (int i : favListSong) {
+            if (i == song.getId())
+                return true;
+        }
+        return false;
+    }
+
 
 }
