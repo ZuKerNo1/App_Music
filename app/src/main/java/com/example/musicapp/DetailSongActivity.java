@@ -36,7 +36,7 @@ import java.util.Random;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailSongActivity extends AppCompatActivity {
-    ImageView btnPlay, nextMusic, previousMusic, repeat, shuffle, video;
+    ImageView btnPlay, nextMusic, previousMusic, repeat, shuffle, video,playList;
     SeekBar seekBar;
     public static MediaPlayer mediaPlayer;
     Runnable runnable;
@@ -148,6 +148,11 @@ public class DetailSongActivity extends AppCompatActivity {
                 if(currentSong.getVideoId() != null) {
                     intent.putExtra("videoId", currentSong.getVideoId());
                 }
+                if(mediaPlayer.isPlaying()) {
+                    btnPlay.setImageResource(R.drawable.ic_play_circle);
+                    mediaPlayer.pause();
+                }
+                startActivity(intent);
             }
         });
 

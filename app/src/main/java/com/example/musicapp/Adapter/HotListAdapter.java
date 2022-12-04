@@ -71,7 +71,7 @@ public class HotListAdapter extends RecyclerView.Adapter<HotListAdapter.MyViewHo
         Bundle bundle = new Bundle();
         bundle.putSerializable("object", songClick);
         Bundle bundle2 = new Bundle();
-        bundle2.putSerializable("listSong", listSong);
+        bundle2.putSerializable("listSong", list);
 
         intent. putExtras (bundle);
         context.startActivity (intent);

@@ -20,9 +20,9 @@
             android:name=".MusicVideoActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeLoginActivity"
             android:name=".PlayListActivity"
             android:exported="false" />
+
         <activity
             android:name=".HomeLoginActivity"
             android:exported="true" >
