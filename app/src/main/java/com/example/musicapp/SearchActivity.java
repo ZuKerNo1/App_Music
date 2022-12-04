@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.Toast;
 
+import com.example.musicapp.Adapter.SearchAdapter;
 import com.example.musicapp.Adapter.SongAdapter;
 import com.example.musicapp.Model.Song;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,16 +30,18 @@ import java.util.regex.Pattern;
 public class SearchActivity extends AppCompatActivity {
 
     ArrayList<Song> listSongSearch;
-    SongAdapter songAdapter;
+    SearchAdapter songAdapter;
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
     androidx.appcompat.widget.SearchView searchView;
+    AppCompatActivity myAc;
 
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        myAc=this;
 
         recyclerView = findViewById(R.id.recyclerViewSearch);
         searchView = findViewById(R.id.textSearchView);
@@ -50,7 +54,7 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         listSongSearch = new ArrayList<>();
-        songAdapter = new SongAdapter(this, listSongSearch);
+        songAdapter = new SearchAdapter(this, listSongSearch);
         recyclerView.setAdapter(songAdapter);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -86,17 +90,33 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.search:
-                        return true;
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
                     case R.id.library:
+                        myAc.finish();
                         startActivity(new Intent(getApplicationContext(),LibraryActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
+                    case R.id.search:
+                        myAc.finish();
+                        return true;
+                    case R.id.play:
+                        if(DetailSongActivity.me != null ){
+                            DetailSongActivity.bottomNavigationView.setSelectedItemId(R.id.play);
+
+                            myAc.finish();
+                            overridePendingTransition(0, 0);
+                        } else{
+                            Toast.makeText(SearchActivity.this, "Không có bài hát nào đang chạy", Toast.LENGTH_SHORT).show();
+                            return false;
+                        }
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.home:
+                        myAc.finish();
+                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
                     case R.id.hotList:
+                        myAc.finish();
                         startActivity(new Intent(getApplicationContext(),HotListActivity.class));
                         overridePendingTransition(0, 0);
                         return true;

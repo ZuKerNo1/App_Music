@@ -60,6 +60,7 @@ public class DetailSongActivity extends AppCompatActivity {
     boolean favourited;
 
     public static AppCompatActivity me;
+    public static BottomNavigationView bottomNavigationView;
 
     CircleImageView image;
     TextView nameSong, singer, currentTime, totalTime;
@@ -75,7 +76,7 @@ public class DetailSongActivity extends AppCompatActivity {
 
 
         animation = AnimationUtils.loadAnimation(this, R.anim.rotate);
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
+         bottomNavigationView = findViewById(R.id.bottomNav);
 
         bottomNavigationView.setSelectedItemId(R.id.play);
 
@@ -85,6 +86,7 @@ public class DetailSongActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.home:
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.search:
                         startActivity(new Intent(getApplicationContext(), SearchActivity.class));

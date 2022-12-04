@@ -44,13 +44,15 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.play:
                         if(DetailSongActivity.me != null){
-                            myAc.finish();
+                            DetailSongActivity.bottomNavigationView.setSelectedItemId(R.id.play);
 
+                            myAc.finish();
+                            overridePendingTransition(0, 0);
                         } else{
                             Toast.makeText(MainActivity.this, "Không có bài hát nào đang chạy", Toast.LENGTH_SHORT).show();
                         }
 //                        startActivity(new Intent(getApplicationContext(),DetailSongActivity.class));
-//                        overridePendingTransition(0, 0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.library:
                         myAc.finish();

@@ -80,11 +80,11 @@ public class SignInActivity extends AppCompatActivity {
         pass = passEdit.getText().toString();
 
         if (TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Vui lòng nhập email!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Enter your Email!", Toast.LENGTH_LONG).show();
             return;
         }
         if (TextUtils.isEmpty(pass)){
-            Toast.makeText(this,"Vui lòng nhập mật khẩu!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Enter your Password!", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -108,15 +108,16 @@ public class SignInActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         String uid = mAuth.getUid();
-                        Toast.makeText(SignInActivity.this,"uid: "+uid+" hello",Toast.LENGTH_LONG ).show();
+                        Toast.makeText(SignInActivity.this,"Sign in Successfull !",Toast.LENGTH_LONG ).show();
                         startActivity(new Intent(SignInActivity.this, MainActivity.class));
                         finish();
                     }
                     else{
-                        Toast.makeText(getApplicationContext(), "Đăng nhập thất bại!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Sign in Failed !", Toast.LENGTH_SHORT).show();
                     }
 
                     }
                 });
+
     }
 }

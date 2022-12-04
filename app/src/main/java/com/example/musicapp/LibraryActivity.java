@@ -133,12 +133,14 @@ public class LibraryActivity extends AppCompatActivity {
                         return true;
                     case R.id.play:
                         if(DetailSongActivity.me != null ){
+                            DetailSongActivity.bottomNavigationView.setSelectedItemId(R.id.play);
                             myAc.finish();
-
+                            overridePendingTransition(0, 0);
                         } else{
                             Toast.makeText(LibraryActivity.this, "Không có bài hát nào đang chạy", Toast.LENGTH_SHORT).show();
                             return true;
                         }
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.home:
                         myAc.finish();
