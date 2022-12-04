@@ -30,8 +30,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     public static AppCompatActivity myAc;
-    HotListAdapter hotListAdapter;
-    LofiAdapter caiGiDoAdapter;
     DatabaseReference databaseReference;
     ImageView logout;
 
