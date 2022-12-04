@@ -44,10 +44,19 @@ public class DetailSongActivity extends AppCompatActivity {
     ImageView heart;
     Handler handler = new Handler();
     Boolean isRepeat = false, isShuffle = false;
-     ArrayList<Integer> favList;
+    ArrayList<Integer> favList;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     public static Activity ac;
-    public String key;
+    public static String key;
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
     boolean favourited;
 
     public static AppCompatActivity me;
@@ -73,22 +82,22 @@ public class DetailSongActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         return true;
                     case R.id.search:
-                        startActivity(new Intent(getApplicationContext(),SearchActivity.class));
+                        startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.play:
                         return true;
                     case R.id.library:
-                        startActivity(new Intent(getApplicationContext(),LibraryActivity.class));
+                        startActivity(new Intent(getApplicationContext(), LibraryActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.hotList:
-                        startActivity(new Intent(getApplicationContext(),HotListActivity.class));
+                        startActivity(new Intent(getApplicationContext(), HotListActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                 }
@@ -107,11 +116,10 @@ public class DetailSongActivity extends AppCompatActivity {
         repeat = findViewById(R.id.repeat);
         shuffle = findViewById(R.id.shuffle);
         playList = findViewById(R.id.playList);
-
+        heart = findViewById(R.id.heart);
         btnPlay = findViewById(R.id.play);
         seekBar = findViewById(R.id.seek_bar);
 
-        heart = findViewById(R.id.heart);
 
 //        Lấy dữ liệu
 
@@ -119,7 +127,6 @@ public class DetailSongActivity extends AppCompatActivity {
 //        String resumeMusic = bundle.getString("resume");
 
         currentSong = (Song) bundle.get("object");
-
 
 
         Glide.with(this).load(currentSong.getImage()).fitCenter().into(image);
@@ -141,7 +148,7 @@ public class DetailSongActivity extends AppCompatActivity {
                 ArrayList<Song> playList = HotListAdapter.list;
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("playList", playList);
-                intent. putExtras (bundle);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -159,7 +166,7 @@ public class DetailSongActivity extends AppCompatActivity {
                         position = listSong.indexOf(song);
                 }
                 position++;
-                if(position < listSong.size()){
+                if (position < listSong.size()) {
                     currentSong = listSong.get(position);
                     mediaPlayer.reset();
                     Glide.with(DetailSongActivity.this).load(currentSong.getImage()).fitCenter().into(image);
@@ -167,7 +174,7 @@ public class DetailSongActivity extends AppCompatActivity {
                     singer.setText(currentSong.getSinger());
                     btnPlay.setImageResource(R.drawable.ic_play_circle);
                     prepareMediaPlayer(currentSong.getSong());
-                }else{
+                } else {
                     mediaPlayer.reset();
                     prepareMediaPlayer(currentSong.getSong());
                 }
@@ -183,11 +190,11 @@ public class DetailSongActivity extends AppCompatActivity {
 
                 int position = 0;
                 for (Song song : listSong) {
-                    if (song.getId() == currentSong.getId() )
+                    if (song.getId() == currentSong.getId())
                         position = listSong.indexOf(song);
                 }
                 position--;
-                if(position >= 0){
+                if (position >= 0) {
                     currentSong = listSong.get(position);
                     mediaPlayer.reset();
 
@@ -196,8 +203,7 @@ public class DetailSongActivity extends AppCompatActivity {
                     singer.setText(currentSong.getSinger());
                     btnPlay.setImageResource(R.drawable.ic_play_circle);
                     prepareMediaPlayer(currentSong.getSong());
-                }
-                else{
+                } else {
                     mediaPlayer.reset();
                     prepareMediaPlayer(currentSong.getSong());
                 }
@@ -219,8 +225,8 @@ public class DetailSongActivity extends AppCompatActivity {
                         position = listSong.indexOf(song);
                 }
                 position++;
-                if(!isRepeat){
-                    if(isShuffle){
+                if (!isRepeat) {
+                    if (isShuffle) {
                         Random random = new Random();
                         position = random.nextInt(listSong.size());
                         currentSong = listSong.get(position);
@@ -230,8 +236,8 @@ public class DetailSongActivity extends AppCompatActivity {
                         singer.setText(currentSong.getSinger());
                         btnPlay.setImageResource(R.drawable.ic_play_circle);
                         prepareMediaPlayer(currentSong.getSong());
-                    }else{
-                        if(position < listSong.size()){
+                    } else {
+                        if (position < listSong.size()) {
                             currentSong = listSong.get(position);
                             mediaPlayer.reset();
                             Glide.with(DetailSongActivity.this).load(currentSong.getImage()).fitCenter().into(image);
@@ -239,15 +245,15 @@ public class DetailSongActivity extends AppCompatActivity {
                             singer.setText(currentSong.getSinger());
                             btnPlay.setImageResource(R.drawable.ic_play_circle);
                             prepareMediaPlayer(currentSong.getSong());
-                        }else{
+                        } else {
                             mediaPlayer.reset();
                             prepareMediaPlayer(currentSong.getSong());
                         }
                     }
-                }else if(isShuffle){
+                } else if (isShuffle) {
                     mediaPlayer.reset();
                     prepareMediaPlayer(currentSong.getSong());
-                }else{
+                } else {
                     mediaPlayer.reset();
                     prepareMediaPlayer(currentSong.getSong());
                 }
@@ -259,10 +265,10 @@ public class DetailSongActivity extends AppCompatActivity {
         repeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isRepeat){
+                if (!isRepeat) {
                     repeat.setImageResource(R.drawable.ic_repeat);
                     isRepeat = true;
-                }else{
+                } else {
                     repeat.setImageResource(R.drawable.ic_unrepeat);
                     isRepeat = false;
                 }
@@ -272,10 +278,10 @@ public class DetailSongActivity extends AppCompatActivity {
         shuffle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!isShuffle){
+                if (!isShuffle) {
                     shuffle.setImageResource(R.drawable.ic_shuffle);
                     isShuffle = true;
-                }else {
+                } else {
                     shuffle.setImageResource(R.drawable.ic_unshuffle);
                     isShuffle = false;
                 }
@@ -285,7 +291,7 @@ public class DetailSongActivity extends AppCompatActivity {
 //      Thêm yêu thích
 
         favList = new ArrayList<>();
-        ImageView heart = findViewById(R.id.heart);
+
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("favourite");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -293,12 +299,14 @@ public class DetailSongActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Favourite favourite = dataSnapshot.getValue(Favourite.class);
-                    if (favourite.getUid().equals(mAuth.getUid())) {
-                        favList.add(favourite.getSongId());
+                    if (favourite.getUid().equals(mAuth.getUid()) && favourite.getSongId()==currentSong.getId()) {
+                        favourited=true;
+
+                        setIconFavourited();
+
+                        DetailSongActivity.key=dataSnapshot.getKey();
                     }
-
                 }
-
             }
 
             @Override
@@ -306,15 +314,8 @@ public class DetailSongActivity extends AppCompatActivity {
 
             }
         });
+        setIconFavourited();
 
-        if (checkFav(currentSong, favList)) {
-            favourited = true;
-            heart.setImageResource(R.drawable.ic_heart_red);
-        } else {
-            favourited = false;
-            heart.setImageResource(R.drawable.ic_heart_solid);
-        }
-        ;
 
         heart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -330,26 +331,25 @@ public class DetailSongActivity extends AppCompatActivity {
                     heart.setImageResource(R.drawable.ic_heart_solid);
 
 //                    Xóa data trên firebase
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("favourite");
-                    databaseReference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                Favourite favourite = dataSnapshot.getValue(Favourite.class);
-                                if (favourite.getUid().equals(mAuth.getUid()) && favourite.getSongId() == currentSong.getId()) {
-                                    key = dataSnapshot.getKey();
-
-                                }
-
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                    FirebaseDatabase.getInstance().getReference("favourite/"+key).removeValue();
+//                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("favourite");
+//                    databaseReference.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                                Favourite favourite = dataSnapshot.getValue(Favourite.class);
+//                                if (favourite.getUid().equals(mAuth.getUid()) && favourite.getSongId() == currentSong.getId()) {
+//                                 DetailSongActivity.       setKey(snapshot.getKey());
+//                                }
+//
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) {
+//
+//                        }
+//                    });
+                    FirebaseDatabase.getInstance().getReference("favourite").child(DetailSongActivity.key) .removeValue();
                     Toast.makeText(DetailSongActivity.this, "Đã xóa khỏi danh sách yêu thích", Toast.LENGTH_SHORT).show();
                     favourited = false;
 
@@ -398,14 +398,12 @@ public class DetailSongActivity extends AppCompatActivity {
         });
 
 
-
-
         //Bottom nav
 
     }
 
-//    Hàm chạy nhạc bằng url
-    public void prepareMediaPlayer(String url){
+    //    Hàm chạy nhạc bằng url
+    public void prepareMediaPlayer(String url) {
         mediaPlayer.reset();
         try {
             mediaPlayer.reset();
@@ -469,6 +467,17 @@ public class DetailSongActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    public void setIconFavourited() {
+        if (favourited) {
+            heart.setImageResource(R.drawable.ic_heart_red);
+        } else
+            heart.setImageResource(R.drawable.ic_heart_solid);
+
+    }
+
+
+
 
 
 }

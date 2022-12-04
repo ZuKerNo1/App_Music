@@ -80,7 +80,7 @@
                 android:background="@drawable/background_edit_text"
                 android:ems="10"
                 android:inputType="textEmailAddress"
-                android:text="email" />
+                android:hint="Email" />
 
             <EditText
                 android:id="@+id/editTextPassword"
@@ -93,7 +93,7 @@
                 android:background="@drawable/background_edit_text"
                 android:ems="10"
                 android:inputType="textPassword"
-                android:text="password" />
+                android:hint="password" />
 
             <TextView
                 android:layout_width="match_parent"

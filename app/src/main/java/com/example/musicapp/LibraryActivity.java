@@ -33,7 +33,7 @@ public class LibraryActivity extends AppCompatActivity {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     HotListAdapter hotListAdapter;
     ArrayList<Song> listSong;
-    boolean favourited;
+
 
     @Override
     protected void onPause() {
@@ -154,10 +154,5 @@ public class LibraryActivity extends AppCompatActivity {
         });
     }
 
-    public void setFavouritedIcon(){
-        if(favourited){
-
-        }
-    }
 
 }
