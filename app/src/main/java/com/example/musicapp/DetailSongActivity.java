@@ -331,24 +331,7 @@ public class DetailSongActivity extends AppCompatActivity {
                     heart.setImageResource(R.drawable.ic_heart_solid);
 
 //                    Xóa data trên firebase
-//                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("favourite");
-//                    databaseReference.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                                Favourite favourite = dataSnapshot.getValue(Favourite.class);
-//                                if (favourite.getUid().equals(mAuth.getUid()) && favourite.getSongId() == currentSong.getId()) {
-//                                 DetailSongActivity.       setKey(snapshot.getKey());
-//                                }
-//
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
+//                    
                     FirebaseDatabase.getInstance().getReference("favourite").child(DetailSongActivity.key) .removeValue();
                     Toast.makeText(DetailSongActivity.this, "Đã xóa khỏi danh sách yêu thích", Toast.LENGTH_SHORT).show();
                     favourited = false;
