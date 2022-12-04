@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="@dimen/_120sdp"
         android:layout_height="@dimen/_120sdp"
-        android:src="@drawable/google"
+        android:src="@drawable/facebook_logo_color"
         app:layout_constraintBottom_toTopOf="@+id/imageView9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/app_name"
+        android:text="music"
         android:textAlignment="textEnd"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HotListActivity">
+    tools:context=".HotListActivity"
+    android:background="@color/colorbk">
 
 
     <ImageView
@@ -23,13 +24,15 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="590dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="1dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/row_library" />
+        app:layout_constraintVertical_bias="0.201"
+        tools:listitem="@layout/row_library"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"

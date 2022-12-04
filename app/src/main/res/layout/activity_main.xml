@@ -5,22 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/white">
+    android:background="@color/colorbk">
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/scrview">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/profile_icon"
+            <TextView
+                android:id="@+id/txtLogout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/customer"
+                android:text="Log out"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintVertical_bias="0"
+                app:layout_constraintHorizontal_bias="0.85"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logout"
                 app:layout_constraintVertical_bias="0"
                 app:layout_constraintHorizontal_bias="1"
                 android:layout_marginRight="20dp"
@@ -30,25 +47,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/notification_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/notification"
-                app:layout_constraintHorizontal_bias="1"
-                app:layout_constraintVertical_bias="0"
-                android:layout_marginRight="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/profile_icon"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/profile_icon"/>
+
 
             <TextView
                 android:id="@+id/hello_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hello"
-                android:textColor="@color/color_trump"
+                android:textColor="@color/black"
                 android:textSize="36sp"
                 app:layout_constraintVertical_bias="0"
                 app:layout_constraintHorizontal_bias="0"
@@ -57,7 +63,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notification_icon"/>
+                app:layout_constraintTop_toBottomOf="@+id/logout"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -66,44 +72,13 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
-                android:textColor="@color/color_trump"
+                android:textColor="@color/black"
                 android:textSize="36sp"
                 android:layout_marginLeft="10dp"
                 app:layout_constraintStart_toEndOf="@id/hello_text"
                 app:layout_constraintTop_toTopOf="@id/hello_text"
                 app:layout_constraintVertical_bias="0"/>
 
-            <EditText
-                android:id="@+id/search"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Search"
-                android:textSize="14sp"
-                android:paddingLeft="20dp"
-                app:layout_constraintVertical_bias="0"
-                app:layout_constraintWidth_percent=".7"
-                app:layout_constraintHorizontal_bias="0"
-                android:paddingTop="15dp"
-                android:paddingBottom="10dp"
-                android:elevation="4dp"
-                android:background="@drawable/search_bg"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/hello_text"
-                app:layout_constraintTop_toBottomOf="@id/hello_text"
-                android:layout_marginTop="15dp"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/search"
-                android:layout_marginLeft="20dp"
-                app:layout_constraintBottom_toBottomOf="@id/search"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintVertical_bias=".5"
-                app:layout_constraintStart_toEndOf="@id/search"
-                app:layout_constraintTop_toTopOf="@id/search"/>
 
             <TextView
                 android:id="@+id/text1"
@@ -112,86 +87,119 @@
                 android:layout_marginLeft="10dp"
                 android:fontFamily="sans-serif-light"
                 android:text="Nhạc mới"
-                android:textColor="@color/color_trump"
+                android:textColor="@color/black"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.006"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/search"
-                app:layout_constraintVertical_bias="0.048" />
+                app:layout_constraintTop_toBottomOf="@id/hello_text"
+                app:layout_constraintVertical_bias="0.01" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_1"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 app:layout_goneMarginTop="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 app:layout_constraintVertical_bias="0"
                 android:layout_marginTop="20dp"
+                tools:listitem="@layout/row_library"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text1"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_goneMarginTop="20dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                app:layout_constraintVertical_bias="0"
-                android:layout_marginTop="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_1"/>
-
             <TextView
                 android:id="@+id/text2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:fontFamily="sans-serif-light"
                 android:text="Thể loại"
-                android:textColor="@color/color_trump"
+                android:textStyle="bold"
+                android:textColor="@color/black"
                 android:textSize="24sp"
+                app:layout_goneMarginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:layout_constraintVertical_bias="0"
+                android:layout_marginTop="20dp"
+                app:layout_constraintHorizontal_bias="0.006"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_2"
-                app:layout_constraintVertical_bias="0.017" />
+                app:layout_constraintTop_toBottomOf="@id/rv_1" />
+
+            <TextView
+                android:id="@+id/txtLofi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="Lofi"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_goneMarginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:layout_constraintVertical_bias="0"
+                android:layout_marginTop="20dp"
+                app:layout_constraintHorizontal_bias="0.006"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text2" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:layout_constraintVertical_bias="0"
+                android:layout_marginTop="20dp"
+                tools:listitem="@layout/row_library"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtLofi"/>
+
+            <TextView
+                android:id="@+id/txtRAP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/row_library"
+                android:fontFamily="sans-serif-light"
+                android:text="RAP"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_goneMarginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:layout_constraintVertical_bias="0"
+                android:layout_marginTop="20dp"
+                app:layout_constraintHorizontal_bias="0.006"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_2" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_3"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                app:layout_goneMarginTop="20dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                app:layout_constraintVertical_bias="0"
                 android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.526"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text2"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/txtRAP"
+                app:layout_constraintVertical_bias="0.0"
                 app:layout_goneMarginTop="20dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                app:layout_constraintVertical_bias="0"
-                android:layout_marginTop="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_3"/>
+                tools:listitem="@layout/row_library" />
 
             <TextView
                 android:id="@+id/text3"
@@ -199,60 +207,94 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:fontFamily="sans-serif-light"
-                android:text="Top 50"
-                android:textColor="@color/color_trump"
+                android:text="Quốc gia"
+                android:textStyle="bold"
+                android:textColor="@color/black"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_4"
+                app:layout_constraintTop_toBottomOf="@id/rv_3"
                 app:layout_constraintVertical_bias="0.029" />
+
+            <TextView
+                android:id="@+id/txtPOP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="sans-serif-light"
+                android:text="Việt Nam"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text3"
+                app:layout_constraintVertical_bias="0.02" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_4"
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                tools:listitem="@layout/row_library"
+                app:layout_goneMarginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:layout_constraintVertical_bias="0"
+                android:layout_marginTop="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtPOP"/>
+
+            <TextView
+                android:id="@+id/txtUSUK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="sans-serif-light"
+                android:text="US-UK"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_4"
+                app:layout_constraintVertical_bias="0.02"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_5"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                app:layout_goneMarginTop="20dp"
+                android:layout_height="320dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                app:layout_constraintVertical_bias="0"
                 android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="75dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text3"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_6"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/txtUSUK"
                 app:layout_goneMarginTop="20dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintVertical_bias="0"
-                android:layout_marginTop="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_5"/>
+                tools:listitem="@layout/row_library" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
 
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNav"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:menu="@menu/menu"
-            app:itemIconTint="@color/check_color"
-            app:itemTextColor="@color/check_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:menu="@menu/menu"
+        app:itemIconTint="@color/check_color"
+        app:itemTextColor="@color/check_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 

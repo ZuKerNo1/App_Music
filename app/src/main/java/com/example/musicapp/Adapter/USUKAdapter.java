@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.bumptech.glide.Glide;
 import com.example.musicapp.DetailSongActivity;
 import com.example.musicapp.Model.Song;
@@ -23,25 +22,25 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class HotListAdapter extends RecyclerView.Adapter<HotListAdapter.MyViewHolder>{
+public class USUKAdapter extends RecyclerView.Adapter<USUKAdapter.MyViewHolder>{
 
     public static Context context;
     public static ArrayList<Song> list;
 
-    public HotListAdapter(Context context, ArrayList<Song> list) {
+    public USUKAdapter(Context context, ArrayList<Song> list) {
         this.context = context;
         this.list = list;
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public USUKAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.row_library,parent,false);
-        return new MyViewHolder(v);
+        return new USUKAdapter.MyViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull USUKAdapter.MyViewHolder holder, int position) {
         Song hotList = list.get(position);
 
         holder.nameSong.setText(hotList.getNameSong());

@@ -102,12 +102,13 @@
         android:id="@+id/currentTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="112dp"
         android:text="0:00"
-        android:layout_marginLeft="10dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/author" />
+        app:layout_constraintTop_toBottomOf="@+id/image_song" />
 
 
     <SeekBar
@@ -117,20 +118,22 @@
         android:layout_marginTop="112dp"
         android:backgroundTint="@color/second"
         android:secondaryProgressTint="@color/primary"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/totalTime"
         app:layout_constraintStart_toEndOf="@+id/currentTime"
-        app:layout_constraintTop_toBottomOf="@+id/author" />
+        app:layout_constraintTop_toBottomOf="@+id/image_song" />
 
     <TextView
         android:id="@+id/totalTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0:00"
-        android:layout_marginTop="112dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="112dp"
+        android:text="0:00"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/author" />
+        app:layout_constraintTop_toBottomOf="@+id/image_song" />
 
     <ImageView
         android:id="@+id/shuffle"
@@ -140,7 +143,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/play"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/play"
-        app:srcCompat="@drawable/ic_shuffle" />
+        app:srcCompat="@drawable/ic_unshuffle"/>
 
     <ImageView
         android:id="@+id/skip_previous"
@@ -156,14 +159,14 @@
         android:id="@+id/play"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginTop="108dp"
+        android:src="@drawable/ic_play_circle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seek_bar"
-        app:layout_constraintVertical_bias="0.247"
-        android:src="@drawable/ic_play_circle" />
+        app:layout_constraintVertical_bias="0.247" />
 
     <ImageView
         android:id="@+id/skip_next"
@@ -183,5 +186,17 @@
         app:layout_constraintBottom_toBottomOf="@+id/play"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/play"
-        app:srcCompat="@drawable/ic_repeat" />
+        app:srcCompat="@drawable/ic_unrepeat"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:menu="@menu/menu"
+        app:itemIconTint="@color/check_color"
+        app:itemTextColor="@color/check_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
