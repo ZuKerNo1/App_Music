@@ -29,6 +29,9 @@ android {
 }
 
 dependencies {
+    // mv
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
+
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'

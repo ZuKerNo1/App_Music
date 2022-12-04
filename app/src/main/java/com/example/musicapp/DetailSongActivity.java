@@ -36,7 +36,7 @@ import java.util.Random;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DetailSongActivity extends AppCompatActivity {
-    ImageView playList, btnPlay, nextMusic, previousMusic, repeat, shuffle;
+    ImageView btnPlay, nextMusic, previousMusic, repeat, shuffle, video;
     SeekBar seekBar;
     public static MediaPlayer mediaPlayer;
     Runnable runnable;
@@ -117,6 +117,7 @@ public class DetailSongActivity extends AppCompatActivity {
         shuffle = findViewById(R.id.shuffle);
         playList = findViewById(R.id.playList);
         heart = findViewById(R.id.heart);
+ 		video = findViewById(R.id.video);
         btnPlay = findViewById(R.id.play);
         seekBar = findViewById(R.id.seek_bar);
 
@@ -124,6 +125,7 @@ public class DetailSongActivity extends AppCompatActivity {
 //        Lấy dữ liệu
 
         Bundle bundle = getIntent().getExtras();
+         currentSong = (Song) bundle.get("object");
 //        String resumeMusic = bundle.getString("resume");
 
         currentSong = (Song) bundle.get("object");
@@ -133,10 +135,21 @@ public class DetailSongActivity extends AppCompatActivity {
         nameSong.setText(currentSong.getNameSong());
         singer.setText(currentSong.getSinger());
 
-
         mediaPlayer = new MediaPlayer();
         handler = new Handler();
+//        Xem MV
 
+        video.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailSongActivity.this, MusicVideoActivity.class);
+                intent.putExtra("nameSong", currentSong.getNameSong());
+                intent.putExtra("singer", currentSong.getSinger());
+                if(currentSong.getVideoId() != null) {
+                    intent.putExtra("videoId", currentSong.getVideoId());
+                }
+            }
+        });
 
 //      Chạy nhạc khi vào trang detail
         prepareMediaPlayer(currentSong.getSong());
@@ -365,6 +378,7 @@ public class DetailSongActivity extends AppCompatActivity {
 //        Chuyển trạng thái nhạc
 
 //        Chuyển trạng thái icon
+//        Chuyển trạng thái nhạc
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -388,6 +402,7 @@ public class DetailSongActivity extends AppCompatActivity {
     //    Hàm chạy nhạc bằng url
     public void prepareMediaPlayer(String url) {
         mediaPlayer.reset();
+//        mediaPlayer.reset();
         try {
             mediaPlayer.reset();
             btnPlay.setImageResource(R.drawable.ic_pause);

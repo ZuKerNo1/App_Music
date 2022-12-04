@@ -17,6 +17,10 @@
         android:theme="@style/Theme.MusicApp"
         tools:targetApi="31">
         <activity
+            android:name=".MusicVideoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeLoginActivity"
             android:name=".PlayListActivity"
             android:exported="false" />
         <activity

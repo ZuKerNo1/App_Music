@@ -71,19 +71,19 @@
         android:textColor="@color/primary"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/more"
+        app:layout_constraintEnd_toStartOf="@+id/video"
         app:layout_constraintStart_toEndOf="@+id/heart"
         app:layout_constraintTop_toBottomOf="@+id/image_song" />
 
     <ImageView
-        android:id="@+id/more"
+        android:id="@+id/video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="28dp"
         app:layout_constraintBottom_toBottomOf="@+id/nameSong"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/nameSong"
-        app:srcCompat="@drawable/ic_more" />
+        app:srcCompat="@drawable/ic_video" />
 
     <TextView
         android:id="@+id/author"
@@ -93,7 +93,7 @@
         android:text="Author"
         android:textColor="@color/second"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/more"
+        app:layout_constraintEnd_toEndOf="@+id/video"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="@+id/heart"
         app:layout_constraintTop_toBottomOf="@+id/nameSong" />
