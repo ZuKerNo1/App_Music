@@ -7,61 +7,49 @@
     tools:context=".HomeLoginActivity">
 
     <ImageView
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_120sdp"
-        android:src="@drawable/facebook_logo_color"
+        android:id="@+id/imageView3"
+        android:layout_width="389dp"
+        android:layout_height="375dp"
+        android:src="@drawable/logo"
         app:layout_constraintBottom_toTopOf="@+id/imageView9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.592" />
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_280sdp"
+        android:layout_width="421dp"
+        android:layout_height="329dp"
         android:src="@drawable/background_home_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <ImageView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="317dp"
+        android:layout_height="125dp"
         android:layout_marginEnd="16dp"
-        android:text="welcome"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_18sdp"
-        android:textStyle="bold"
+        android:src="@drawable/welcome_text"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView9"
-        app:layout_constraintVertical_bias="0.108" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="345dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:text="music"
-        android:textAlignment="textEnd"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintVertical_bias="0.075" />
 
     <Button
         android:id="@+id/btnSignUp"
         android:layout_width="121dp"
         android:layout_height="48dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="64dp"
         android:background="@drawable/background_black_button_login"
         android:text="sign up"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSignIn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toTopOf="@+id/btnSignIn" />
 
     <Button
         android:id="@+id/btnSignIn"

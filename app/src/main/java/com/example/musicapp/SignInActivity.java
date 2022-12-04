@@ -40,7 +40,7 @@ public class SignInActivity extends AppCompatActivity {
         emailEdit = findViewById(R.id.editTextEmail);
         passEdit = findViewById(R.id.editTextPassword);
         loginBtn = findViewById(R.id.btnSignIn);
-        registerBtn = findViewById(R.id.register);
+        registerBtn = findViewById(R.id.btnSignUp);
         imgBack = findViewById(R.id.imgBack);
 
         imgBack.setOnClickListener(new View.OnClickListener() {

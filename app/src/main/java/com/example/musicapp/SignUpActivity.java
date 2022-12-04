@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.musicapp.Model.userModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SignUpActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
-    private EditText editTextEmail, editTextpassword;
+    private EditText editTextEmail, editTextpassword, editTextconfirm;
     private Button signUp;
     private TextView signin_btn;
     private ImageView imgBack;
@@ -40,10 +41,11 @@ public class SignUpActivity extends AppCompatActivity {
 
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextpassword = findViewById(R.id.editTextPassword);
+        editTextconfirm = findViewById(R.id.editTextPasswordConfirm);
         email = editTextEmail.toString();
         password = editTextpassword.toString();
         signUp = findViewById(R.id.btnSignUp);
-        signin_btn = findViewById(R.id.signIn);
+        signin_btn = findViewById(R.id.btnSignIn);
         imgBack = findViewById(R.id.imgBack);
         signin_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,27 +64,34 @@ public class SignUpActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String email = editTextEmail.getText().toString().trim();
-//                String password = editTextpassword.getText().toString().trim();
-//                if (email.isEmpty()) {
-//                    editTextEmail.setError("Email is required");
-//                }
-//                if (password.isEmpty()) {
-//                    editTextpassword.setError("Password is required");
-//                } else {
-//                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<AuthResult> task) {
-//                            if(task.isSuccessful()) {
-//                                Toast.makeText(SignUpActivity.this, "thanh cong", Toast.LENGTH_SHORT).show();
-//                            }
-//                            else {
-//                                Toast.makeText(SignUpActivity.this, "that bai" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    });
-//                }
-                SignUp();
+                String email = editTextEmail.getText().toString().trim();
+                String password = editTextpassword.getText().toString().trim();
+                String confirmPass = editTextconfirm.getText().toString().trim();
+                if (email.isEmpty()) {
+                    editTextEmail.setError("Email is required");
+                }
+                if (password.isEmpty()) {
+                    editTextpassword.setError("Password is required");
+                }
+                if(confirmPass.isEmpty()){
+                    editTextconfirm.setError("ConfirmPass is required");
+                }else if(password.equals(confirmPass)){
+                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()) {
+                                Toast.makeText(SignUpActivity.this, "Sign up successfuly", Toast.LENGTH_SHORT).show();
+                                SignUp();
+                            }
+                            else {
+                                Toast.makeText(SignUpActivity.this, "Sign up failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }else{
+                    editTextconfirm.setError("ConfirmPass is incorrect");
+                }
+
             }
         });
 
