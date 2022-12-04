@@ -13,37 +13,34 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.bumptech.glide.Glide;
 import com.example.musicapp.DetailSongActivity;
 import com.example.musicapp.Model.Song;
-import com.example.musicapp.MusicVideoActivity;
 import com.example.musicapp.R;
 
 import java.util.ArrayList;
-import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
+public class RAPAdapter extends RecyclerView.Adapter<RAPAdapter.MyViewHolder>{
 
-public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder>{
     public static Context context;
     public static ArrayList<Song> list;
 
-
-    public SongAdapter(Context context, ArrayList<Song> list) {
+    public RAPAdapter(Context context, ArrayList<Song> list) {
         this.context = context;
         this.list = list;
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RAPAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.row_library,parent,false);
-        return new MyViewHolder(v);
+        return new RAPAdapter.MyViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RAPAdapter.MyViewHolder holder, int position) {
         Song hotList = list.get(position);
 
         holder.nameSong.setText(hotList.getNameSong());
@@ -73,13 +70,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder>{
         bundle.putSerializable("object", songClick);
         intent. putExtras (bundle);
         context.startActivity (intent);
-}    private void goToMVSong(Song songClick) {
-        Intent intent = new Intent(context, MusicVideoActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("object", songClick);
-
-        intent. putExtras (bundle);
-        context.startActivity (intent);
     }
 
     @Override
@@ -103,10 +93,5 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder>{
             constraintLayout = itemView.findViewById(R.id.constraintLayout);
 
         }
-    }
-
-    public void filterSongs(ArrayList<Song> filteredList){
-        list = filteredList;
-        notifyDataSetChanged();
     }
 }

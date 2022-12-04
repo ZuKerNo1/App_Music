@@ -86,7 +86,7 @@ public class LibraryActivity extends AppCompatActivity {
 
 
 //        Lấy dữ liệu từ FireBase
-        databaseReference = FirebaseDatabase.getInstance().getReference("song_gg");
+        databaseReference = FirebaseDatabase.getInstance().getReference("song");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

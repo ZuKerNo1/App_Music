@@ -76,7 +76,7 @@ public class DetailSongActivity extends AppCompatActivity {
 
 
         animation = AnimationUtils.loadAnimation(this, R.anim.rotate);
-         bottomNavigationView = findViewById(R.id.bottomNav);
+        bottomNavigationView = findViewById(R.id.bottomNav);
 
         bottomNavigationView.setSelectedItemId(R.id.play);
 
@@ -119,7 +119,7 @@ public class DetailSongActivity extends AppCompatActivity {
         shuffle = findViewById(R.id.shuffle);
         playList = findViewById(R.id.playList);
         heart = findViewById(R.id.heart);
- 		video = findViewById(R.id.video);
+        video = findViewById(R.id.video);
         btnPlay = findViewById(R.id.play);
         seekBar = findViewById(R.id.seek_bar);
 
@@ -127,7 +127,7 @@ public class DetailSongActivity extends AppCompatActivity {
 //        Lấy dữ liệu
 
         Bundle bundle = getIntent().getExtras();
-         currentSong = (Song) bundle.get("object");
+        currentSong = (Song) bundle.get("object");
 //        String resumeMusic = bundle.getString("resume");
 
         currentSong = (Song) bundle.get("object");

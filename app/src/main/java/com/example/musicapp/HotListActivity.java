@@ -52,7 +52,7 @@ public class HotListActivity extends AppCompatActivity {
         searchView = findViewById(R.id.textSearchViewHostList);
 
 //        Lấy dữ liệu từ FireBase
-        databaseReference = FirebaseDatabase.getInstance().getReference("song_gg");
+        databaseReference = FirebaseDatabase.getInstance().getReference("song");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
