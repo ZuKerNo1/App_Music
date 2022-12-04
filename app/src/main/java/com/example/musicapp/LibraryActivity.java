@@ -22,17 +22,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class LibraryActivity extends AppCompatActivity {
     public static AppCompatActivity myAc;
 
-    DbSevice dbSevice = new DbSevice();
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     SongAdapter songAdapter;
     ArrayList<Song> listSong;
+    androidx.appcompat.widget.SearchView searchView;
 
 
     @Override
@@ -51,6 +53,10 @@ public class LibraryActivity extends AppCompatActivity {
         listSong = new ArrayList<>();
         //Ánh xạ
         recyclerView = findViewById(R.id.recyclerViewLibrary);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
+        bottomNavigationView.setSelectedItemId(R.id.library);
+        searchView = findViewById(R.id.textSearchViewLibrary);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -59,7 +65,6 @@ public class LibraryActivity extends AppCompatActivity {
 
 
 //        Lấy list id bài hát yêu thích
-
         ArrayList<Integer> FavouriteList = new ArrayList<>();
         DatabaseReference databaseReference_f = FirebaseDatabase.getInstance().getReference("favourite");
         databaseReference_f.addValueEventListener(new ValueEventListener() {
@@ -81,7 +86,6 @@ public class LibraryActivity extends AppCompatActivity {
 
 
 //        Lấy dữ liệu từ FireBase
-
         databaseReference = FirebaseDatabase.getInstance().getReference("song_gg");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -102,19 +106,19 @@ public class LibraryActivity extends AppCompatActivity {
             }
         });
 
+        //Nhận ký tự tìm
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
-//
-//        Bundle bundle = getIntent().getExtras();
-//        String id = (String) bundle.get("Action_next");
-//        firebaseDatabase.getInstance().getReference("Song").child(id);
-
-
-//        Bottom Nav
-
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
-
-        bottomNavigationView.setSelectedItemId(R.id.library);
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterSong(converToString(newText.toLowerCase().trim()));
+                return true;
+            }
+        });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -135,8 +139,6 @@ public class LibraryActivity extends AppCompatActivity {
                             Toast.makeText(LibraryActivity.this, "Không có bài hát nào đang chạy", Toast.LENGTH_SHORT).show();
                             return true;
                         }
-//                        startActivity(new Intent(getApplicationContext(),DetailSongActivity.class));
-//                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.home:
                         myAc.finish();
@@ -154,5 +156,34 @@ public class LibraryActivity extends AppCompatActivity {
         });
     }
 
+    //Tìm và đổ lại dữ liệu cho recyclerView
+    private void filterSong(String query) {
+        ArrayList<Song> filteredList = new ArrayList<>();
 
+        if(listSong.size() > 0)
+        {
+            for( Song songSearch : listSong){
+                if(converToString(songSearch.getNameSong().toLowerCase()).contains(query) || converToString(songSearch.getSinger().toLowerCase()).contains(query)){
+                    filteredList.add(songSearch);
+                }
+            }
+            if(songAdapter != null){
+                songAdapter.filterSongs(filteredList);
+            }
+        }
+    }
+
+    //Chuyển từ tiếng việt sang không dấu
+    public String converToString(String value){
+        try {
+            String temp = Normalizer.normalize(value, Normalizer.Form.NFD);
+            Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+            temp = pattern.matcher(temp).replaceAll("");
+            return temp.replaceAll("đ", "d");
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }
