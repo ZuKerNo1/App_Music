@@ -64,11 +64,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder>{
         context.startActivity (intent);
     }
 
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
-
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView id, nameSong, singer;
         ConstraintLayout constraintLayout;
@@ -84,5 +79,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder>{
             constraintLayout = itemView.findViewById(R.id.constraintLayout);
 
         }
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
     }
 }

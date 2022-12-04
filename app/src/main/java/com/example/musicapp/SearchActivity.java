@@ -31,6 +31,7 @@ public class SearchActivity extends AppCompatActivity {
     ArrayList<Song> listSongSearch;
     SongAdapter songAdapter;
     RecyclerView recyclerView;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,25 +41,26 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewSearch);
 
         //Lấy dữ liệu từ FireBase
+        databaseReference = FirebaseDatabase.getInstance().getReference("song");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        listSongSearch = SongAdapter.list;
+        listSongSearch = new ArrayList<>();
 
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-//                    Song song = dataSnapshot.getValue(Song.class);
-//                    listSongSearch.add(song);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Song song = dataSnapshot.getValue(Song.class);
+                    listSongSearch.add(song);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
@@ -117,6 +119,9 @@ public class SearchActivity extends AppCompatActivity {
     private void filterSong(String query) {
         ArrayList<Song> filteredList = new ArrayList<>();
 
+        songAdapter = new SongAdapter(this, filteredList);
+        recyclerView.setAdapter(songAdapter);
+
         if(listSongSearch.size() > 0)
         {
             for( Song songsearch : listSongSearch){
@@ -124,8 +129,9 @@ public class SearchActivity extends AppCompatActivity {
                     filteredList.add(songsearch);
                 }
             }
-            songAdapter = new SongAdapter(this, filteredList);
-            recyclerView.setAdapter(songAdapter);
+            if(songAdapter != null){
+                songAdapter.notifyDataSetChanged();
+            }
         }
     }
 }

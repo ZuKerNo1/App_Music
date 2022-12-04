@@ -23,6 +23,7 @@ public class LibraryActivity extends AppCompatActivity {
 
     ArrayList<Song> listSongSearch;
     SongAdapter songAdapter;
+    DatabaseReference databaseReference;
     RecyclerView recyclerView;
 
     @Override
@@ -33,6 +34,7 @@ public class LibraryActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewLibrary);
 
         //Lấy dữ liệu từ FireBase
+        databaseReference = FirebaseDatabase.getInstance().getReference("song");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
