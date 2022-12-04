@@ -8,7 +8,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,22 +17,18 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="88dp"
+            android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
             android:drawableBottom="@android:color/black">
 
-            <TextView
-                android:id="@+id/idMusic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:text="01"
-                android:textColor="@color/primary"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/author"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageMusic"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/name_song"
-                app:layout_constraintVertical_bias="0.529" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/name_song"
@@ -44,7 +40,7 @@
                 android:textColor="@color/primary"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/idMusic"
+                app:layout_constraintStart_toEndOf="@+id/imageMusic"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -58,24 +54,6 @@
                 app:layout_constraintStart_toStartOf="@+id/name_song"
                 app:layout_constraintTop_toBottomOf="@+id/name_song" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/time"-->
-<!--                android:layout_width="105dp"-->
-<!--                android:layout_height="21dp"-->
-<!--                android:text="TextView"-->
-<!--                android:textColor="@color/third"-->
-<!--                android:textSize="12sp"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/author"-->
-<!--                tools:layout_editor_absoluteY="51dp" />-->
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
-                android:src="@drawable/ic_more"
-                app:layout_constraintBottom_toBottomOf="@+id/author"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/name_song" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.musicapp.Adapter.HotListAdapter;
 import com.example.musicapp.Model.Favourite;
@@ -24,21 +25,28 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class LibraryActivity extends AppCompatActivity {
+    public static AppCompatActivity myAc;
 
     DbSevice dbSevice = new DbSevice();
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
-    DatabaseReference databaseReference_listSong;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    FirebaseDatabase firebaseDatabase;
     HotListAdapter hotListAdapter;
     ArrayList<Song> listSong;
-    ArrayList<Song> myList;
+    boolean favourited;
+
+    @Override
+    protected void onPause() {
+        myAc = this;
+        myAc.finish();
+        super.onPause();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
+        myAc = this;
 
         listSong = new ArrayList<>();
         //Ánh xạ
@@ -51,8 +59,6 @@ public class LibraryActivity extends AppCompatActivity {
 
 
 //        Lấy list id bài hát yêu thích
-//        myList = new ArrayList<>();
-//        myList= dbSevice.getListFavouriteSongByUid(String.valueOf(mAuth.getUid()));
 
         ArrayList<Integer> FavouriteList = new ArrayList<>();
         DatabaseReference databaseReference_f = FirebaseDatabase.getInstance().getReference("favourite");
@@ -117,19 +123,29 @@ public class LibraryActivity extends AppCompatActivity {
                     case R.id.library:
                         return true;
                     case R.id.search:
-                        startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                        myAc.finish();
+                        startActivity(new Intent(getApplicationContext(),SearchActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.play:
-                        DetailSongActivity.ac.
-                        startActivity(new Intent(getApplicationContext(), DetailSongActivity.class));
-                        overridePendingTransition(0, 0);
+                        if(DetailSongActivity.me != null ){
+                            myAc.finish();
+
+                        } else{
+                            Toast.makeText(LibraryActivity.this, "Không có bài hát nào đang chạy", Toast.LENGTH_SHORT).show();
+                            return true;
+                        }
+//                        startActivity(new Intent(getApplicationContext(),DetailSongActivity.class));
+//                        overridePendingTransition(0, 0);
+                        return true;
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        myAc.finish();
+                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.hotList:
-                        startActivity(new Intent(getApplicationContext(), HotListActivity.class));
+                        myAc.finish();
+                        startActivity(new Intent(getApplicationContext(),HotListActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                 }
@@ -137,4 +153,11 @@ public class LibraryActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void setFavouritedIcon(){
+        if(favourited){
+
+        }
+    }
+
 }

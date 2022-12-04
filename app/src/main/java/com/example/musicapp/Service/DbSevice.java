@@ -45,7 +45,7 @@ public class DbSevice {
 
             }
         });
-        return this.listSong;
+        return listSong;
     }
 
     //get user  favourite list

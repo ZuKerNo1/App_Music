@@ -6,7 +6,8 @@ import java.io.Serializable;
 
 public class Song implements Serializable {
     int id;
-    String image, nameSong, singer, song,type;
+   
+    String image, nameSong, singer, song, type;
 
     public Song(int id, String image, String nameSong, String singer, String song) {
         this.id = id;
@@ -26,6 +27,14 @@ public class Song implements Serializable {
     }
 
     public Song() {
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getId() {
@@ -68,11 +77,5 @@ public class Song implements Serializable {
         this.song = song;
     }
 
-    public String getType() {
-        return type;
-    }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 }

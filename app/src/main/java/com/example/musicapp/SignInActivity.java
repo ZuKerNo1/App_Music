@@ -106,12 +106,16 @@ public class SignInActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
-
+                    if(task.isSuccessful()){
                         String uid = mAuth.getUid();
                         Toast.makeText(SignInActivity.this,"uid: "+uid+" hello",Toast.LENGTH_LONG ).show();
                         startActivity(new Intent(SignInActivity.this, MainActivity.class));
                         finish();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Đăng nhập thất bại!", Toast.LENGTH_SHORT).show();
+                    }
+
                     }
                 });
     }
