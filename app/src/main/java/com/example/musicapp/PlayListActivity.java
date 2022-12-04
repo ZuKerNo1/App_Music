@@ -27,7 +27,7 @@ public class PlayListActivity extends AppCompatActivity {
 
         myAc = this;
 
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerViewHotList);
         back = findViewById(R.id.back);
 
         Bundle bundle = getIntent().getExtras();

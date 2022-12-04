@@ -68,6 +68,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        //Nhận ký tự tìm
         searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -105,7 +106,8 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    public void filterSong(String query) {
+    //Tìm và đổ lại dữ liệu cho recyclerView
+    private void filterSong(String query) {
         ArrayList<Song> filteredList = new ArrayList<>();
 
         if(listSongSearch.size() > 0)
@@ -121,6 +123,7 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    //Chuyển từ tiếng việt sang không dấu
     public String converToString(String value){
         try {
             String temp = Normalizer.normalize(value, Normalizer.Form.NFD);

@@ -19,17 +19,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class HotListActivity extends AppCompatActivity {
     public static AppCompatActivity myAc;
 
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
-    FirebaseDatabase firebaseDatabase;
     SongAdapter songAdapter;
     ArrayList<Song> list;
-    ArrayList<Song> MonoList;
+    androidx.appcompat.widget.SearchView searchView;
 
     @Override
     protected void onPause() {
@@ -44,8 +45,11 @@ public class HotListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hot_list);
         myAc = this;
 
-//Ánh xạ
-        recyclerView = findViewById(R.id.recyclerView);
+        //Ánh xạ
+        recyclerView = findViewById(R.id.recyclerViewHotList);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
+        bottomNavigationView.setSelectedItemId(R.id.hotList);
+        searchView = findViewById(R.id.textSearchViewHostList);
 
 //        Lấy dữ liệu từ FireBase
         databaseReference = FirebaseDatabase.getInstance().getReference("song_gg");
@@ -53,7 +57,6 @@ public class HotListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         list = new ArrayList<>();
-        MonoList = new ArrayList<>();
         songAdapter = new SongAdapter(this, list);
         recyclerView.setAdapter(songAdapter);
 
@@ -76,11 +79,19 @@ public class HotListActivity extends AppCompatActivity {
             }
         });
 
+        //Nhận ký tự tìm
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
-//        Bottom Nav
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
-
-        bottomNavigationView.setSelectedItemId(R.id.hotList);
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterSong(converToString(newText.toLowerCase().trim()));
+                return true;
+            }
+        });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -101,8 +112,6 @@ public class HotListActivity extends AppCompatActivity {
                             Toast.makeText(HotListActivity.this, "Không có bài hát nào đang chạy", Toast.LENGTH_SHORT).show();
                             return true;
                         }
-//                        startActivity(new Intent(getApplicationContext(),DetailSongActivity.class));
-//                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.library:
                         myAc.finish();
@@ -120,4 +129,34 @@ public class HotListActivity extends AppCompatActivity {
         });
     }
 
+    //Tìm và đổ lại dữ liệu cho recyclerView
+    private void filterSong(String query) {
+        ArrayList<Song> filteredList = new ArrayList<>();
+
+        if(list.size() > 0)
+        {
+            for( Song songSearch : list){
+                if(converToString(songSearch.getNameSong().toLowerCase()).contains(query) || converToString(songSearch.getSinger().toLowerCase()).contains(query)){
+                    filteredList.add(songSearch);
+                }
+            }
+            if(songAdapter != null){
+                songAdapter.filterSongs(filteredList);
+            }
+        }
+    }
+
+    //Chuyển từ tiếng việt sang không dấu
+    public String converToString(String value){
+        try {
+            String temp = Normalizer.normalize(value, Normalizer.Form.NFD);
+            Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+            temp = pattern.matcher(temp).replaceAll("");
+            return temp.replaceAll("đ", "d");
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }
