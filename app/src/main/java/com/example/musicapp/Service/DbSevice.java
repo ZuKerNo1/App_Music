@@ -2,7 +2,7 @@ package com.example.musicapp.Service;
 
 import androidx.annotation.NonNull;
 
-import com.example.musicapp.Adapter.HotListAdapter;
+import com.example.musicapp.Adapter.SongAdapter;
 import com.example.musicapp.Model.Favourite;
 import com.example.musicapp.Model.Song;
 import com.google.firebase.database.DataSnapshot;
@@ -21,7 +21,7 @@ public class DbSevice {
 
 
     FirebaseDatabase firebaseDatabase;
-    HotListAdapter hotListAdapter;
+    SongAdapter songAdapter;
     ArrayList<Song> list;
     ArrayList<Song> MonoList;
 

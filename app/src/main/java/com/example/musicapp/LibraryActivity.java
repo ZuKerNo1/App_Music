@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.musicapp.Adapter.HotListAdapter;
+import com.example.musicapp.Adapter.SongAdapter;
 import com.example.musicapp.Model.Favourite;
 import com.example.musicapp.Model.Song;
 import com.example.musicapp.Service.DbSevice;
@@ -31,7 +31,7 @@ public class LibraryActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    HotListAdapter hotListAdapter;
+    SongAdapter songAdapter;
     ArrayList<Song> listSong;
 
 
@@ -50,12 +50,12 @@ public class LibraryActivity extends AppCompatActivity {
 
         listSong = new ArrayList<>();
         //Ánh xạ
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerViewLibrary);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        hotListAdapter = new HotListAdapter(this, listSong);
-        recyclerView.setAdapter(hotListAdapter);
+        songAdapter = new SongAdapter(this, listSong);
+        recyclerView.setAdapter(songAdapter);
 
 
 //        Lấy list id bài hát yêu thích
@@ -93,7 +93,7 @@ public class LibraryActivity extends AppCompatActivity {
 
                     }
                 }
-                hotListAdapter.notifyDataSetChanged();
+                songAdapter.notifyDataSetChanged();
             }
 
             @Override

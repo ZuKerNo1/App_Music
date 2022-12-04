@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.musicapp.Adapter.HotListAdapter;
+import com.example.musicapp.Adapter.SongAdapter;
 import com.example.musicapp.Model.Song;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class PlayListActivity extends AppCompatActivity {
     public static AppCompatActivity myAc;
     ArrayList<Song> PlayList;
     RecyclerView recyclerView;
-    HotListAdapter hotListAdapter;
+    SongAdapter songAdapter;
     ImageView back;
 
     @Override
@@ -37,8 +37,8 @@ public class PlayListActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        hotListAdapter = new HotListAdapter(this, PlayList);
-        recyclerView.setAdapter(hotListAdapter);
+        songAdapter = new SongAdapter(this, PlayList);
+        recyclerView.setAdapter(songAdapter);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

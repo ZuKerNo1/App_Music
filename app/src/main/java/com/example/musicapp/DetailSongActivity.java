@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.musicapp.Adapter.HotListAdapter;
+import com.example.musicapp.Adapter.SongAdapter;
 import com.example.musicapp.Model.Favourite;
 import com.example.musicapp.Model.Song;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -163,7 +163,7 @@ public class DetailSongActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DetailSongActivity.this, PlayListActivity.class);
-                ArrayList<Song> playList = HotListAdapter.list;
+                ArrayList<Song> playList = SongAdapter.list;
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("playList", playList);
                 intent.putExtras(bundle);
@@ -175,7 +175,7 @@ public class DetailSongActivity extends AppCompatActivity {
         nextMusic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<Song> listSong = HotListAdapter.list;
+                ArrayList<Song> listSong = SongAdapter.list;
 
                 int position = 0;
 
@@ -204,7 +204,7 @@ public class DetailSongActivity extends AppCompatActivity {
         previousMusic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<Song> listSong = HotListAdapter.list;
+                ArrayList<Song> listSong = SongAdapter.list;
 
                 int position = 0;
                 for (Song song : listSong) {
@@ -234,7 +234,7 @@ public class DetailSongActivity extends AppCompatActivity {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
 
-                ArrayList<Song> listSong = HotListAdapter.list;
+                ArrayList<Song> listSong = SongAdapter.list;
 
                 int position = 0;
 

@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.musicapp.Adapter.HotListAdapter;
+import com.example.musicapp.Adapter.SongAdapter;
 import com.example.musicapp.Model.Song;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +27,7 @@ public class HotListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
-    HotListAdapter hotListAdapter;
+    SongAdapter songAdapter;
     ArrayList<Song> list;
     ArrayList<Song> MonoList;
 
@@ -54,8 +54,8 @@ public class HotListActivity extends AppCompatActivity {
 
         list = new ArrayList<>();
         MonoList = new ArrayList<>();
-        hotListAdapter = new HotListAdapter(this, list);
-        recyclerView.setAdapter(hotListAdapter);
+        songAdapter = new SongAdapter(this, list);
+        recyclerView.setAdapter(songAdapter);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -67,7 +67,7 @@ public class HotListActivity extends AppCompatActivity {
                     }
                 }
 
-                hotListAdapter.notifyDataSetChanged();
+                songAdapter.notifyDataSetChanged();
             }
 
             @Override

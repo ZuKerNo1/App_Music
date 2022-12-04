@@ -21,15 +21,16 @@ import com.example.musicapp.MusicVideoActivity;
 import com.example.musicapp.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class HotListAdapter extends RecyclerView.Adapter<HotListAdapter.MyViewHolder>{
+public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder>{
 
     public static Context context;
     public static ArrayList<Song> list;
 
-    public HotListAdapter(Context context, ArrayList<Song> list) {
+    public SongAdapter(Context context, ArrayList<Song> list) {
         this.context = context;
         this.list = list;
     }
@@ -112,5 +113,10 @@ public class HotListAdapter extends RecyclerView.Adapter<HotListAdapter.MyViewHo
             constraintLayout = itemView.findViewById(R.id.constraintLayout);
 
         }
+    }
+
+    public void filterSongs(ArrayList<Song> filteredList){
+        list = filteredList;
+        notifyDataSetChanged();
     }
 }
