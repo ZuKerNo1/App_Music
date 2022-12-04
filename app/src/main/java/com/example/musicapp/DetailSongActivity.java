@@ -21,6 +21,7 @@ import com.example.musicapp.Model.Song;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -82,7 +83,7 @@ public class DetailSongActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bundle bundle = getIntent().getExtras();
-                ArrayList<Song> listSong = SongAdapter.list;
+                List<Song> listSong = SongAdapter.list;
 
                 int position = 0;
 
@@ -112,7 +113,7 @@ public class DetailSongActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bundle bundle = getIntent().getExtras();
-                ArrayList<Song> listSong = SongAdapter.list;
+                List<Song> listSong = SongAdapter.list;
 
                 int position = 0;
                 for (Song song : listSong) {
@@ -143,7 +144,7 @@ public class DetailSongActivity extends AppCompatActivity {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
                 Bundle bundle = getIntent().getExtras();
-                ArrayList<Song> listSong = SongAdapter.list;
+                List<Song> listSong = SongAdapter.list;
 
                 int position = 0;
 

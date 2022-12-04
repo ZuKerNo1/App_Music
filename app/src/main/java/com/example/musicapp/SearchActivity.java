@@ -5,15 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
-import com.example.musicapp.Adapter.HotListAdapter;
 import com.example.musicapp.Adapter.SongAdapter;
 import com.example.musicapp.Model.Song;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,11 +31,13 @@ import java.util.List;
 
 public class SearchActivity extends AppCompatActivity {
 
-    ArrayList<Song> listSongSearch;
+    List<Song> listSongSearch;
     SongAdapter songAdapter;
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
+    androidx.appcompat.widget.SearchView searchView;
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +45,16 @@ public class SearchActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewSearch);
 
+        searchView = findViewById(R.id.textSearchView);
+
         //Lấy dữ liệu từ FireBase
         databaseReference = FirebaseDatabase.getInstance().getReference("song");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         listSongSearch = new ArrayList<>();
+        songAdapter = new SongAdapter(this, listSongSearch);
+        recyclerView.setAdapter(songAdapter);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -53,6 +62,7 @@ public class SearchActivity extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Song song = dataSnapshot.getValue(Song.class);
                     listSongSearch.add(song);
+                    songAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -62,6 +72,18 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterSong(newText.toLowerCase());
+                return true;
+            }
+        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
 
@@ -90,47 +112,19 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.search_btn, menu);
-
-        MenuItem menuItem = findViewById(R.id.searchBtn);
-        SearchView searchView = (SearchView) menuItem.getActionView();
-
-        SearchSong(searchView);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    private void SearchSong(SearchView searchView) {
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filterSong(newText.toLowerCase());
-                return true;
-            }
-        });
-    }
 
     private void filterSong(String query) {
-        ArrayList<Song> filteredList = new ArrayList<>();
-
-        songAdapter = new SongAdapter(this, filteredList);
-        recyclerView.setAdapter(songAdapter);
+        List<Song> filteredList = new ArrayList<>();
 
         if(listSongSearch.size() > 0)
         {
-            for( Song songsearch : listSongSearch){
-                if(songsearch.getNameSong().toLowerCase().contains(query)){
-                    filteredList.add(songsearch);
+            for( Song songSearch : listSongSearch){
+                if(songSearch.getNameSong().toLowerCase().contains(query) || songSearch.getSinger().toLowerCase().contains(query)){
+                    filteredList.add(songSearch);
                 }
             }
             if(songAdapter != null){
-                songAdapter.notifyDataSetChanged();
+                songAdapter.filterSongs(filteredList);
             }
         }
     }

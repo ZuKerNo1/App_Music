@@ -31,16 +31,16 @@ public class LibraryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
 
-        recyclerView = findViewById(R.id.recyclerViewLibrary);
-
-        //Lấy dữ liệu từ FireBase
-        databaseReference = FirebaseDatabase.getInstance().getReference("song");
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        listSongSearch = SongAdapter.list;
-        songAdapter = new SongAdapter(this, listSongSearch);
-        recyclerView.setAdapter(songAdapter);
+//        recyclerView = findViewById(R.id.recyclerViewLibrary);
+//
+//        //Lấy dữ liệu từ FireBase
+//        databaseReference = FirebaseDatabase.getInstance().getReference("song");
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
+//        listSongSearch = SongAdapter.list;
+//        songAdapter = new SongAdapter(this, listSongSearch);
+//        recyclerView.setAdapter(songAdapter);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
 
@@ -69,45 +69,45 @@ public class LibraryActivity extends AppCompatActivity {
             }
         });
     }
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.search_btn, menu);
-
-        MenuItem menuItem = findViewById(R.id.searchBtn);
-        SearchView searchView = (SearchView) menuItem.getActionView();
-
-        SearchSong(searchView);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    private void SearchSong(SearchView searchView) {
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filterSong(newText.toLowerCase());
-                return true;
-            }
-        });
-    }
-
-    private void filterSong(String query) {
-        ArrayList<Song> filteredList = new ArrayList<>();
-
-        if(listSongSearch.size() > 0)
-        {
-            for( Song songsearch : listSongSearch){
-                if(songsearch.getNameSong().toLowerCase().contains(query)){
-                    filteredList.add(songsearch);
-                }
-                if (songAdapter != null){
-                    songAdapter.notifyDataSetChanged();
-                }
-            }
-        }
-    }
+//    public boolean onCreateOptionsMenu(Menu menu){
+//        getMenuInflater().inflate(R.menu.search_btn, menu);
+//
+//        MenuItem menuItem = findViewById(R.id.searchBtn);
+//        SearchView searchView = (SearchView) menuItem.getActionView();
+//
+//        SearchSong(searchView);
+//
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    private void SearchSong(SearchView searchView) {
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                filterSong(newText.toLowerCase());
+//                return true;
+//            }
+//        });
+//    }
+//
+//    private void filterSong(String query) {
+//        ArrayList<Song> filteredList = new ArrayList<>();
+//
+//        if(listSongSearch.size() > 0)
+//        {
+//            for( Song songsearch : listSongSearch){
+//                if(songsearch.getNameSong().toLowerCase().contains(query)){
+//                    filteredList.add(songsearch);
+//                }
+//                if (songAdapter != null){
+//                    songAdapter.notifyDataSetChanged();
+//                }
+//            }
+//        }
+//    }
 }

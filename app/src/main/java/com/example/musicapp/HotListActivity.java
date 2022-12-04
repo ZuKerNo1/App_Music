@@ -37,7 +37,7 @@ public class HotListActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
 
         //Lấy dữ liệu từ FireBase
-        databaseReference = FirebaseDatabase.getInstance().getReference("song");
+        databaseReference = FirebaseDatabase.getInstance().getReference("song_gg");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

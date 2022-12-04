@@ -18,13 +18,13 @@ import com.example.musicapp.DetailSongActivity;
 import com.example.musicapp.Model.Song;
 import com.example.musicapp.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder>{
     Context context;
-    public static ArrayList<Song> list;
+    public static List<Song> list;
 
-    public SongAdapter(Context context, ArrayList<Song> list) {
+    public SongAdapter(Context context, List<Song> list) {
         this.context = context;
         this.list = list;
     }
@@ -79,6 +79,11 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.MyViewHolder>{
             constraintLayout = itemView.findViewById(R.id.constraintLayout);
 
         }
+    }
+
+    public void filterSongs(List<Song> filteredList){
+        list = filteredList;
+        notifyDataSetChanged();
     }
 
     @Override
