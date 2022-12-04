@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.musicapp.Adapter.HotListAdapter;
 import com.example.musicapp.Model.Song;
@@ -21,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class HotListActivity extends AppCompatActivity {
+    public static AppCompatActivity myAc;
 
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
@@ -29,15 +31,23 @@ public class HotListActivity extends AppCompatActivity {
     ArrayList<Song> list;
 
     @Override
+    protected void onPause() {
+        myAc = this;
+        myAc.finish();
+        super.onPause();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hot_list);
+        myAc = this;
 
 //Ánh xạ
         recyclerView = findViewById(R.id.recyclerView);
 
 //        Lấy dữ liệu từ FireBase
-        databaseReference = FirebaseDatabase.getInstance().getReference("song");
+        databaseReference = FirebaseDatabase.getInstance().getReference("song_gg");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -76,14 +86,28 @@ public class HotListActivity extends AppCompatActivity {
                     case R.id.hotList:
                         return true;
                     case R.id.search:
+                        myAc.finish();
                         startActivity(new Intent(getApplicationContext(),SearchActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
+                    case R.id.play:
+                        if(DetailSongActivity.me != null ){
+                            myAc.finish();
+
+                        } else{
+                            Toast.makeText(HotListActivity.this, "Không có bài hát nào đang chạy", Toast.LENGTH_SHORT).show();
+                            return true;
+                        }
+//                        startActivity(new Intent(getApplicationContext(),DetailSongActivity.class));
+//                        overridePendingTransition(0, 0);
+                        return true;
                     case R.id.library:
+                        myAc.finish();
                         startActivity(new Intent(getApplicationContext(),LibraryActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.home:
+                        myAc.finish();
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         overridePendingTransition(0, 0);
                         return true;
@@ -93,26 +117,4 @@ public class HotListActivity extends AppCompatActivity {
         });
     }
 
-    public ArrayList<Song> getHotList(String type){
-        ArrayList<Song> HotList = new ArrayList<>();
-        databaseReference = FirebaseDatabase.getInstance().getReference("song");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Song song = dataSnapshot.getValue(Song.class);
-                    if(song.getType() == "HotList"){
-                        HotList.add(song);
-                    }
-                }
-                hotListAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return HotList;
-    }
 }
