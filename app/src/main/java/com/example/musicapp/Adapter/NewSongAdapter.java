@@ -25,7 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class NewSongAdapter extends RecyclerView.Adapter<NewSongAdapter.MyViewHolder>{
 
     public static Context context;
-    public static ArrayList<Song> list;
+    ArrayList<Song> list;
 
     public NewSongAdapter(Context context, ArrayList<Song> list) {
         this.context = context;
@@ -53,9 +53,9 @@ public class NewSongAdapter extends RecyclerView.Adapter<NewSongAdapter.MyViewHo
                 if(DetailSongActivity.me != null && DetailSongActivity.mediaPlayer.isPlaying()){
                     DetailSongActivity.me.finish();
                     DetailSongActivity.mediaPlayer.reset();
-                    goToDetailSong(hotList);
+                    goToDetailSong(hotList,list);
                 } else{
-                    goToDetailSong(hotList);
+                    goToDetailSong(hotList,list);
                 }
 
 
@@ -64,12 +64,18 @@ public class NewSongAdapter extends RecyclerView.Adapter<NewSongAdapter.MyViewHo
 
     }
 
-    public static void goToDetailSong(Song songClick) {
+    public static void goToDetailSong(Song songClick, ArrayList<Song> listSong) {
         Intent intent = new Intent(context, DetailSongActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("object", songClick);
+
+        Bundle bundle2 = new Bundle();
+        bundle2.putSerializable("listSong", listSong);
+        intent. putExtras (bundle2);
         intent. putExtras (bundle);
+
         context.startActivity (intent);
+
     }
 
     @Override

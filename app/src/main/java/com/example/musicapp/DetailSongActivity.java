@@ -165,7 +165,8 @@ public class DetailSongActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DetailSongActivity.this, PlayListActivity.class);
-                ArrayList<Song> playList = SongAdapter.list;
+                Bundle bundle1 = getIntent().getExtras();
+                ArrayList<Song> playList = (ArrayList<Song>) bundle1.get("listSong");
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("playList", playList);
                 intent.putExtras(bundle);
@@ -177,7 +178,8 @@ public class DetailSongActivity extends AppCompatActivity {
         nextMusic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<Song> listSong = SongAdapter.list;
+                Bundle bundle = getIntent().getExtras();
+                ArrayList<Song> listSong = (ArrayList<Song>) bundle.get("listSong");
 
                 int position = 0;
 
@@ -206,7 +208,8 @@ public class DetailSongActivity extends AppCompatActivity {
         previousMusic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<Song> listSong = SongAdapter.list;
+                Bundle bundle = getIntent().getExtras();
+                ArrayList<Song> listSong = (ArrayList<Song>) bundle.get("listSong");
 
                 int position = 0;
                 for (Song song : listSong) {
@@ -236,7 +239,8 @@ public class DetailSongActivity extends AppCompatActivity {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
 
-                ArrayList<Song> listSong = SongAdapter.list;
+                Bundle bundle = getIntent().getExtras();
+                ArrayList<Song> listSong = (ArrayList<Song>) bundle.get("listSong");
 
                 int position = 0;
 
